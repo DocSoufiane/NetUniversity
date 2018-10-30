@@ -1,0 +1,17 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}  
+{% block contenu %}
+<div class="row">
+<div class="col-md-12">
+
+          {{ render(controller("NetUniversityPlatformBundle:Utilisateur:CreerCours", {'UserId' : UserId})) }} 
+          {{ render(controller("NetUniversityPlatformBundle:Utilisateur:AfficheMesModiles", {'UserId' : UserId})) }} 
+
+        </div>
+        <!-- /.col-->
+
+
+
+          </div>
+
+
+{% endblock %}

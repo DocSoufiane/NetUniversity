@@ -1,0 +1,90 @@
+
+<!-- بـسم الله الرحمـن الرحيم -->
+{# src/OC/PlatformBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<?php include("title.php");?>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mode2.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+</style>
+<body>
+<div class="w3-sidebar w3-bar-block" style="width:25%;right:0">
+  {# <h5 class="w3-bar-item">Menu</h5>
+  <a href="#" class="w3-bar-item w3-button">Link 1</a> 
+  <a href="#" class="w3-bar-item w3-button">Link 2</a> 
+  <a href="#" class="w3-bar-item w3-button">Link 3</a> 
+
+  #}
+
+  <div class="w3-container w3-dark-grey">
+    <h4>Menu</h4>
+  </div>
+
+ {# <img src="img_snowtops.jpg">  #}
+
+ {{ render(controller("NetUniversityPlatformBundle:Utilisateur:Profilinfo")) }}
+  <a href="#" class="w3-bar-item w3-button w3-red">Home</a>
+  <a href="#" class="w3-bar-item w3-button">Projects 
+    <span class="w3-tag w3-red w3-round w3-right">8</span>
+  </a>
+  <a href="#" class="w3-bar-item w3-button">About</a>
+  <a href="#" class="w3-bar-item w3-button">Contact</a>
+
+  <div class="w3-panel w3-blue-grey w3-display-container">
+    <span class="w3-button w3-display-topright">X</span>
+    <p>Lorem ipsum box...</p>
+  </div>
+</div>
+
+<div style="margin-right:25%">
+<div class="w3-container w3-red w3-cell">
+  {% block contenu %}{% endblock %}
+</div>
+
+<div class="w3-container w3-green w3-cell">
+  <p>Hello W3.CSS Layout.</p>
+  <p>Hello W3.CSS Layout.</p>
+  <p>Hello W3.CSS Layout.</p>
+  <p>Hello W3.CSS Layout.</p>
+</div>
+
+
+</div>
+
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html> 

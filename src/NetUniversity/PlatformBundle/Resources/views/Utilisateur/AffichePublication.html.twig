@@ -1,0 +1,25 @@
+{# src/OC/PlatformBundle/Resources/view/Utilisateur/AfficherPublication.html.twig #}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bienvenue sur ma première page avec OpenClassrooms !</title>
+  </head>
+  <body>
+    <h3>Publications:</h3>
+
+{% if not Utilisateur.Publication.empty %}
+  <p>
+    L'URL de l'annance :
+    {% for publication in Utilisateur.Publication %}
+      {{ publication.nom }} <ln>
+      {{ publication.lien }} <ln>
+      {{ publication.datededepos }} <ln>
+
+
+      {% if not loop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+{% endif %}
+
+  </body>
+</html>

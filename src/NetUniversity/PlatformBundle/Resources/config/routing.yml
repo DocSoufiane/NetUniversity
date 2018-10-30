@@ -1,0 +1,286 @@
+# SRC/NETUNIVERSITY/PlatformBundle/Resources/config/routing.yml
+
+#hello-world:
+#    path: /hello-world
+#    defaults: { _controller: NetUniversityPlatformBundle:Advert:index }
+index:
+    path: /
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+authentication:
+    path: /Authentification
+    defaults: { _controller: NetUniversityPlatformBundle:Authentification:index }
+cendage:
+    path: /Cendage
+    defaults: { _controller: NetUniversityPlatformBundle:Cendage:index }
+#contacts:
+#    path: /Contacts
+#    defaults: { _controller: NetUniversityPlatformBundle:Contacts:index }
+forum:
+    path: /Forum
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:index }
+gestionClasse:
+    path: /Classe
+    defaults: { _controller: NetUniversityPlatformBundle:GestionClasse:index }
+gestion:
+    path: /Gestion
+    defaults: { _controller: NetUniversityPlatformBundle:Gestion:index }
+#university:
+#    path: /University
+#    defaults: { _controller: NetUniversityPlatformBundle:GestionUniversity:index }
+#institut:
+#    path: Institut
+#    defaults: { _controller: NetUniversityPlatformBundle:GestionInstitut:index }
+#deppartement:
+#    path: /Deppartement
+#    defaults: { _controller: NetUniversityPlatformBundle:GestionDeppartement:index }
+#filier:
+#    path: /Filier
+#    defaults: { _controller: NetUniversityPlatformBundle:GestionFilier:index }
+utilisateur:
+    path: /User
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:index }
+utilisateuradd:
+    path: /User/add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:add }
+
+addPublication:
+    path: /Publication/add
+    defaults: { _controller: NetUniversityPlatformBundle:Publication:add }
+
+indexPublication:
+    path: /Publication
+    defaults: { _controller: NetUniversityPlatformBundle:Publication:index }
+
+UserPublication:
+    path: /User/Publication/{UserId}
+    defaults:
+      _controller: NetUniversityPlatformBundle:Utilisateur:AffichePublication
+    requirements:
+      id: \d+
+
+utilisateuredit:
+    path: /User/editPublication/{UserId}
+    defaults:  
+      _controller: NetUniversityPlatformBundle:Utilisateur:editPublication 
+    requirements:
+      id: \d+
+
+utilisateurview:
+    path: /User/{UserId}
+    defaults:  
+      _controller: NetUniversityPlatformBundle:Utilisateur:Profilinfo
+    requirements:
+      id: \d+
+
+utilisateureditcategory:
+    path: /User/editCategory/{UserId}
+    defaults:  
+      _controller: NetUniversityPlatformBundle:Utilisateur:edit 
+    requirements:
+      id: \d+
+
+HomeIndex:
+    path: /Home
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+#utilisateurSingUP:
+#    path: /SingUP
+#    defaults: { _controller: NetUniversityPlatformBundle:Home:singup }
+
+#login:
+#    path: /login
+#    defaults:
+#        _controller: NetUniversityUserBundle:Security:login
+
+#login_check:
+ #   path: /login_check
+
+#logout:
+#    path: /logout
+
+MyModules:
+    path: /MyModules/{UserId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:MyModules
+    requirements:
+      id: \d+
+
+CreatCours:
+    path: /CreatCours/{UserId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:CreerCours
+    requirements:
+      id: \d+
+
+ETUDIANT:
+    path: /ETUDIANT
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+PROF:
+    path: /PROF   
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+ADMIN:
+    path: /ADMIN  
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+DOYEN:
+    path: /DOYEN     
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
+
+addUniversity:
+    path: /University/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddUniversity }
+
+addInstitut:
+    path: /Institut/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddInstitut } 
+
+addDepartement:
+    path: /Deppartement/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddDepartement } 
+
+addFiliere:
+    path: /Filiere/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddFiliere} 
+
+addModule:
+    path: /Module/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddModule} 
+
+addCours:
+    path: /Cours/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddCours} 
+
+ListeUniversity:
+    path: /Universities
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeUniversity}
+
+ListeContacts:
+    path: /Contacts
+    defaults: { _controller: NetUniversityPlatformBundle:Contact:listeContacts}
+
+ViewUniversity:
+    path: /University/{UniversityId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheUniversity
+    requirements:
+      id: \d+   
+
+ViewInstitut:
+    path: /Institut/{InstitutId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheInstitut
+    requirements:
+      id: \d+ 
+
+ViewDepartement:
+    path: /Deppartement/{DepartementId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheDepartement
+    requirements:
+      id: \d+ 
+
+ViewFiliere:
+    path: /Filiere/{FiliereId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheFiliere
+    requirements:
+      id: \d+ 
+
+ViewModule:
+    path: /Module/{ModuleId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheModule
+    requirements:
+      id: \d+ 
+
+ViewCours:
+    path: /Cours/{CoursId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Utilisateur:afficheCours
+    requirements:
+      id: \d+
+
+ListeInstitut:
+    path: /Instituts
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeInstitut}
+
+ListeDepartement:
+    path: /Deppartements
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeDepartement}
+
+ListeFiliere:
+    path: /Filieres
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeFiliere}
+
+ListeModule:
+    path: /Modules
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeModule}
+
+ListeCours:
+    path: /Cours
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeCours}
+
+indexMail:
+    path: /Mail
+    defaults: { _controller: NetUniversityPlatformBundle:Mail:index}
+
+readMail:
+    path: /Mail/Read
+    defaults: { _controller: NetUniversityPlatformBundle:Mail:read}
+
+composeMail:
+    path: /Mail/Compose
+    defaults: { _controller: NetUniversityPlatformBundle:Mail:compose}
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"   
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+like_Cours:
+    path: /user/enable/{id}
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:likeCours}
+
+Recherche:
+    path: /Recherche
+    defaults: { _controller: NetUniversityPlatformBundle:Recherche:recherche}
+
+GestionRole:
+    path: /ADMIN/GestionRole
+    defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:GestionRole}
+
+set-ROLE:
+    path: /ADMIN/GestionRole/SET
+    defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:addRole}
+
+ChangeContact:
+    path: /Contact/SET
+    defaults: { _controller: NetUniversityPlatformBundle:Contact:addRole}
+
+gestionCompt:
+    path: /SetAccount
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:GestionCompt}
+
+getInstitutById:
+    path: /getInstitutById
+    defaults: { _controller: NetUniversityPlatformBundle:University:getInstitutById}

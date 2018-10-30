@@ -1,0 +1,23 @@
+ <!-- search form -->
+
+    {{ form_start(form, {'attr': {'class': 'sidebar-form'}}) }}
+    {{ form_errors(form) }}
+        <div class="input-group">
+      {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder':'Search...'}}) }}
+      {{ form_errors(form.nom) }}
+          
+              <span class="input-group-btn">
+                 {{ form_rest(form) }}
+                 <button>
+				 {{ form_widget(form.save, {'attr': {'class': 'btn btn-flat', 'id': 'search-btn', }}) }}
+               </button>
+              </span>
+
+        </div>
+
+           
+ 
+
+
+  {{ form_end(form) }}
+

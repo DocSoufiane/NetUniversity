@@ -1,0 +1,520 @@
+<?php
+
+namespace NetUniversity\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * Cours
+ *
+ * @ORM\Table(name="cours")
+ * @ORM\Entity(repositoryClass="NetUniversity\PlatformBundle\Repository\CoursRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Cours
+{
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur")
+   * @ORM\JoinColumn(nullable=false)
+   */
+    private $utilisateur;
+
+
+    /**
+   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Module", inversedBy="cours")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $module;
+
+   /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", mappedBy="cours")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $Commentaire;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255)
+     */
+    private $nom;    
+
+    /**
+    * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+    */
+    private $like;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Fichier", type="string", length=255, nullable=true)
+     */
+    private $Fichier;    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Type", type="string", length=255)
+     */
+    private $Type;
+   
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="Cours", type="text", nullable=true)
+     */
+    private $Cours;
+
+    /**
+    * @ORM\Column(name="derniereModif", type="datetime", nullable=true)
+    */
+    private $derniereModif;
+
+    /**
+    * @ORM\Column(name="DateDeCreation", type="datetime")
+    */
+    private $DateDeCreation;
+
+
+  private $file;
+  
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  public function setFile(UploadedFile $file = null)
+  {
+    $this->file = $file;
+  }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom.
+     *
+     * @param string $nom
+     *
+     * @return Cours
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom.
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set cours.
+     *
+     * @param string $cours
+     *
+     * @return Cours
+     */
+    public function setCours($cours)
+    {
+        $this->Cours = $cours;
+
+        return $this;
+    }
+
+    /**
+     * Get cours.
+     *
+     * @return string
+     */
+    public function getCours()
+    {
+        return $this->Cours;
+    }
+
+    /**
+     * Set derniereModif.
+     *
+     * @param \DateTime $derniereModif
+     *
+     * @return Cours
+     */
+    public function setDerniereModif($derniereModif)
+    {
+        $this->derniereModif = $derniereModif;
+
+        return $this;
+    }
+
+    /**
+     * Get derniereModif.
+     *
+     * @return \DateTime
+     */
+    public function getDerniereModif()
+    {
+        return $this->derniereModif;
+    }
+
+    /**
+     * Set dateDeCreation.
+     *
+     * @param \DateTime $dateDeCreation
+     *
+     * @return Cours
+     */
+    public function setDateDeCreation($dateDeCreation)
+    {
+        $this->DateDeCreation = $dateDeCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDeCreation.
+     *
+     * @return \DateTime
+     */
+    public function getDateDeCreation()
+    {
+        return $this->DateDeCreation;
+    }
+
+    /**
+     * Set fichier.
+     *
+     * @param string $fichier
+     *
+     * @return Cours
+     */
+    public function setFichier($fichier)
+    {
+        $this->Fichier = $fichier;
+
+        return $this;
+    }
+
+    /**
+     * Get fichier.
+     *
+     * @return string
+     */
+    public function getFichier()
+    {
+        return $this->Fichier;
+    }
+
+    /**
+     * Set type.
+     *
+     * @param string $type
+     *
+     * @return Cours
+     */
+    public function setType($type)
+    {
+        $this->Type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->Type;
+    }
+
+    /**
+     * Set utilisateur.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Cours
+     */
+    public function setUtilisateur(\NetUniversity\PlatformBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+
+    public function upload()
+      {
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->file) {
+          return;
+        }
+
+        // On récupère le nom original du fichier de l'internaute
+        $name = $this->file->getClientOriginalName();
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move($this->getUploadRootDir(), $name);
+
+        // On sauvegarde le nom de fichier dans notre attribut $url
+        $this->Fichier = '../uploads/Cours/'.$name.$this->id;
+        $this->Cours = '../uploads/Cours/'.$name.$this->id;
+
+      }
+
+    public function getUploadDir()
+      {
+        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
+        return 'uploads/Cours';
+      }
+
+    protected function getUploadRootDir()
+      {
+        // On retourne le chemin relatif vers l'image pour notre code PHP
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+      }
+      
+  /**
+ * @ORM\PreUpdate
+ */  
+  public function updateDate()
+  {
+    $this->setDerniereModif(new \Datetime());
+  }
+
+
+
+    /**
+     * Set module.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Module $module
+     *
+     * @return Cours
+     */
+    public function setModule(\NetUniversity\PlatformBundle\Entity\Module $module)
+    {
+        $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get module.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Module
+     */
+    public function getModule()
+    {
+        return $this->module;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->Commentaire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->like = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
+
+    /**
+     * Add commentaire.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaire
+     *
+     * @return Cours
+     */
+    public function addCommentaire(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaire)
+    {
+        $this->Commentaire[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaire
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCommentaire(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaire)
+    {
+        return $this->Commentaire->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaire.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->Commentaire;
+    }
+
+
+        /**
+     * Add Module.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Module $module
+     *
+     * @return Cours
+     */
+    public function addModule(\NetUniversity\PlatformBundle\Entity\Module $module)
+    {
+        $this->module[] = $module;
+
+        return $this;
+    }
+
+    /**
+     * Remove cour.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Cours $cour
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCour(\NetUniversity\PlatformBundle\Entity\Cours $cour)
+    {
+        return $this->cours->removeElement($cour);
+    }
+
+
+
+    /**
+     * Set like.
+     *
+     * @param int $like
+     *
+     * @return Cours
+     */
+    public function setLike($like)
+    {
+        $this->like = $like;
+
+        return $this;
+    }
+
+/* 
+    // Notez le singulier, on ajoute une seule like à la fois
+    public function addlike(Utilisateur $like)
+    {
+    // Ici, on utilise l'ArrayCollection vraiment comme un tableau
+    $this->like[] = $like;
+    }
+*/
+    /**
+     * Get like.
+     *
+     * @return int
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * Remove module.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Module $module
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeModule(\NetUniversity\PlatformBundle\Entity\Module $module)
+    {
+        return $this->module->removeElement($module);
+    }
+
+    /**
+     * Add like.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $like
+     *
+     * @return Cours
+     */
+    public function addLike(\NetUniversity\PlatformBundle\Entity\Utilisateur $like)
+    {
+        $this->like[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $like
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLike(\NetUniversity\PlatformBundle\Entity\Utilisateur $like)
+    {
+        return $this->like->removeElement($like);
+    }
+
+    /**
+     * Set recherche.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
+     *
+     * @return Support
+     */
+    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
+    {
+        $this->recherche = $recherche;
+
+        return $this;
+    }
+
+    /**
+     * Get recherche.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
+     */
+    public function getRecherche()
+    {
+        return $this->recherche;
+    }
+
+
+
+}

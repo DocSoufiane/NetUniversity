@@ -1,0 +1,239 @@
+<?php
+
+namespace NetUniversity\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Support
+ *
+ * @ORM\Table(name="support")
+ * @ORM\Entity(repositoryClass="NetUniversity\PlatformBundle\Repository\SupportRepository")
+ */
+abstract class Support
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"})
+    */
+    private $recherche;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDeCreation", type="datetime")
+     */
+    private $dateDeCreation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDeModif", type="datetime")
+     */
+    private $dateDeModif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Type", type="string", length=255)
+     */
+    private $type;
+
+
+    /**
+    * @ORM\Column(name="urlFile", type="string", length=255)
+    */
+    private $urlFile;
+
+  private $file;
+  
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  public function setFile(UploadedFile $file = null)
+  {
+    $this->file = $file;
+  }
+
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateDeCreation.
+     *
+     * @param \DateTime $dateDeCreation
+     *
+     * @return Support
+     */
+    public function setDateDeCreation($dateDeCreation)
+    {
+        $this->dateDeCreation = $dateDeCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDeCreation.
+     *
+     * @return \DateTime
+     */
+    public function getDateDeCreation()
+    {
+        return $this->dateDeCreation;
+    }
+
+    /**
+     * Set dateDeModif.
+     *
+     * @param \DateTime $dateDeModif
+     *
+     * @return Support
+     */
+    public function setDateDeModif($dateDeModif)
+    {
+        $this->dateDeModif = $dateDeModif;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDeModif.
+     *
+     * @return \DateTime
+     */
+    public function getDateDeModif()
+    {
+        return $this->dateDeModif;
+    }
+
+    /**
+     * Set type.
+     *
+     * @param string $type
+     *
+     * @return Support
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+  public function getUploadDir()
+      {
+        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
+        return 'uploads/img';
+      }
+
+    protected function getUploadRootDir()
+      {
+        // On retourne le chemin relatif vers l'image pour notre code PHP
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+      }
+    
+
+
+    /**
+     * Set nom.
+     *
+     * @param string $nom
+     *
+     * @return Support
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom.
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set urlFile.
+     *
+     * @param string $urlFile
+     *
+     * @return Support
+     */
+    public function setUrlFile($urlFile)
+    {
+        $this->urlFile = $urlFile;
+
+        return $this;
+    }
+
+    /**
+     * Get urlFile.
+     *
+     * @return string
+     */
+    public function getUrlFile()
+    {
+        return $this->urlFile;
+    }
+
+        public function upload()
+      {
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->file) {
+          return;
+        }
+
+        // On récupère le nom original du fichier de l'internaute
+        $name = $this->file->getClientOriginalName();
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move($this->getUploadRootDir(), $name);
+
+        // On sauvegarde le nom de fichier dans notre attribut $url
+        $this->urlIMAGE = '../uploads/img/'.$name.$this->id;
+
+      }
+
+
+}

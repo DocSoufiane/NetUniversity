@@ -1,0 +1,74 @@
+{# src/OC/PlatformBundle/Resources/view/Publication/view.html.twig #}
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}
+{#
+{% if not advert.categories.empty %}
+  <p>
+    Cette annonce est parue dans les catégories suivantes :
+    {% for category in advert.categories %}
+      {{ category.name }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+{% endif %} #}
+{% block contenu %}. 
+{#
+{% if not advert.categories.empty %}
+<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
+	
+	<p>
+	Je n'est rien piblié !
+	</p>
+	
+</div>
+
+{% endif %}#}
+
+
+{#  {% else %}  #}
+	
+      <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
+        <img src="photo_mombre" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">datedepub</span>
+        <h4>prenom</h4><br>
+		<a href="profilex.php?id=$propr['id']&affich=$don['id']">
+	 <h4 title="$don['titre']">$don['titre']</h4>
+      
+    </a>
+        <hr class="w3-clear">
+          <div class="w3-row-padding" style="margin:0 -16px">
+            <div style=" width:100%;" class="w3-half">
+						{#   <?php       #} 
+						{#if($don['type']=='video'){    #}
+							
+						{#	if(!strstr(htmlspecialchars($don['participation']), 'videoparti')){?>   #}
+					<iframe width="100%" style="min-height: 250px;" src="https://www.youtube.com/embed/$don['participation']" frameborder="0" allowfullscreen></iframe>
+				{# <?php	}  #}
+					{#  if((strstr(htmlspecialchars($don['participation']), '.MP4') OR strstr(htmlspecialchars($don['participation']), '.mp4'))AND strstr( htmlspecialchars($don['participation']), 'videoparti')){ #}
+					{# 	?> #}
+						<video width="100%" style="min-height: 250px;" controls>
+						<source src="$don['participation']" type="video/mp4">
+						</video>
+					{# 	<?php #}
+					{# } #}
+					
+				
+			{# } #}
+			{# if($don['type']=='article'){ #}
+		{# 		?> #}
+			<!--
+		<a href="profilex.php?id=<?php echo htmlspecialchars($_SESSION['id']);?>&affich=<?php echo htmlspecialchars($don['id']);?>"> #}
+	 <h4 title="<?php echo htmlspecialchars($don['titre']); ?>"><?php echo substr(htmlspecialchars($don['titre']), 0, 70); ?></h4> #}
+      
+  {#   </a> --> #}
+		{# 		<?php #}
+		{# 	} #}
+			
+		
+          {#  ?> #}
+           </div>
+        </div>
+       <!-- <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> -->
+      </div>
+{# {% endif %}  #}
+
+{% endblock %}

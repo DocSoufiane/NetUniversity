@@ -1,0 +1,129 @@
+<!-- بـسم الله الرحمـن الرحيم -->
+{# src/OC/PlatformBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<?php include("title.php");?>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mode2.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+</style>
+<body class="w3-theme-l5">
+
+<!--  menu top  -->
+{# {{ render(controller("NetUniversityPlatformBundle:Template:menuTop")) }} #} 
+
+{# {% block menu-top %}menu top{% endblock %} #}
+
+
+
+<!-- Page Container -->
+{# {% block Container %}Carte d'information Profil{% endblock %} #}
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+     <div class="w3-card-2 w3-round w3-white">
+        <div class="w3-container">
+			{{ render(controller("NetUniversityPlatformBundle:Utilisateur:Profilinfo")) }} 
+			{# {% block Profil %}Carte d'information Profil{% endblock %}   #}
+        </div>
+      </div>
+      <br>
+      
+      <!-- Accordion -->
+     <div class="w3-card-2 w3-round">
+        <div class="w3-accordion w3-white">
+
+			{% block Accordion %}Accordion{% endblock %}
+        
+	    </div>      
+	  </div>
+      <br>
+      
+
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+	
+	{% block contenu %}{% endblock %}
+	  			
+		      </div>
+		
+</div>
+	
+	
+    <!-- Right Column -->
+    <div class="w3-col m2">
+	{#
+{{ render(controller("NetUniversityPlatformBundle:Publication:menu")) }} 
+     #}
+      
+      <div class="w3-card-2 w3-round w3-white w3-padding-32 w3-center">
+        <p><i class="fa fa-bug w3-xxlarge"></i></p>
+      </div>
+	  <br>
+	   
+      <div class="w3-card-2 w3-round w3-white w3-padding-16 w3-center">
+        <?php include("pub.php");?>
+      </div>
+      <br>
+      
+
+  
+    <!-- End Right Column -->
+    </div>
+  
+
+</div>
+		
+    
+  <!-- End Grid -->
+
+
+<!-- End Page Container -->
+</div>
+<br>
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+ <!-- <h5>Footer</h5>  -->
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by <a href="http://www.netunivrsity.ma" target="_blank">Soufiane BERJAMY</a></p>
+</footer>
+ 
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html> 

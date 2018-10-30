@@ -1,0 +1,52 @@
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Ajouter un article:
+                <small>Simple and fast</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+              {{ form_start(form, {'attr': {'': ''}}) }}
+              {{ form_errors(form) }}
+
+              <p>  
+                {{ form_label(form.Nom, "Nom", {'label_attr': {'class': ''}}) }}
+                {{ form_widget(form.Nom, {'attr': {'class': 'w3-input'}}) }}
+                {{ form_errors(form.Nom) }}
+              </p>
+
+              <p>  
+       
+                {{ form_label(form.Type, "Type", {'label_attr': {'class': ''}}) }}
+                {{ form_widget(form.Type, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.Type) }}
+              </p>
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            
+
+            <div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                  <input type="file" id="exampleInputFile">
+
+                  <p class="help-block">Example block-level help text here.</p>
+                </div>
+
+               <div class="box-footer">
+                  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }} {# <button type="submit" class="btn btn-primary">Submit</button> #}
+              </div>  
+
+
+            {{ form_rest(form) }}
+            </div>
+         
+
+          </div>

@@ -1,0 +1,34 @@
+  <!-- search form -->
+
+    {{ form_start(form, {'attr': {'class': 'sidebar-form'}}) }}
+    {{ form_errors(form) }}
+
+        <div class="input-group">
+    
+      {{ form_widget(form.recherche, {'attr': {'class': 'form-control', 'placeholder':'Search...'}}) }}
+      {{ form_errors(form.recherche) }}
+          
+              <span class="input-group-btn">
+                 {{ form_rest(form) }}
+				          {{ form_widget(form.save, {'attr': {'class': 'btn btn-flat', 'id': 'search-btn', }}) }}
+              </span>
+
+        </div>
+
+
+  {{ form_end(form) }}
+
+
+{#
+ {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+      {{ form_widget(form.nom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.nom) }}
+
+  {{ form_rest(form) }}
+
+  {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+  {{ form_end(form) }}
+#}

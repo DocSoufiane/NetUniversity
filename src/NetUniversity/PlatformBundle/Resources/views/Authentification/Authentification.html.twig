@@ -1,0 +1,32 @@
+
+	if(htmlspecialchars($donne['validationcompt'])==1){
+	$_SESSION['prenom']= htmlspecialchars($donne['prenom']);
+	$_SESSION['photo_mombre']= $donne['photo_mombre'];
+	//$_SESSION['login']= $donne['login'];
+	$_SESSION['grad']= $donne['grad'];
+	$_SESSION['id']= $donne['id'];
+	$modifi = $bdd->prepare('UPDATE coordonnemombre SET dernierevisite = NOW() WHERE email = :email');
+	$modifi->execute(array('email' => htmlspecialchars($_POST['email'])));
+		if(htmlspecialchars($donne['grad'])== 'admin')
+		{
+			$_SESSION['mombre']= 'admin';
+		}
+		else{ $_SESSION['mombre']='mombre'; }
+	
+	}
+	else{
+		$cvj = $bdd->prepare('SELECT FROM coordonnemombre WHERE (id= :id) AND ( ( ( (DAY(NOW())- DAY(datedinscription) < 11) AND (DAY(NOW())>= DAY(datedinscription))) OR ( ( (DAY(NOW())- DAY(datedinscription) < 31) OR (DAY(NOW())- DAY(datedinscription) > 20) ) AND (DAY(NOW())< DAY(datedinscription)) )) AND (YEAR(NOW())=YEAR(datedinscription)) AND (MONTH(NOW())=MONTH(datedinscription)) )');
+		$cvj->execute(array('id'=>$donne['id']));
+		if($dele = $cvj->fetch()){
+				$_SESSION['prenom']= htmlspecialchars($donne['prenom']);
+				$_SESSION['photo_mombre']= $donne['photo_mombre'];
+				
+				$_SESSION['grad']= $donne['grad'];
+				$_SESSION['id']= $donne['id'];
+				$modifi = $bdd->prepare('UPDATE coordonnemombre SET dernierevisite = NOW() WHERE email = :email');
+				$modifi->execute(array('email' => htmlspecialchars($_POST['email'])));
+					if(htmlspecialchars($donne['grad'])== 'admin')
+					{
+						$_SESSION['mombre']= 'admin';
+					}
+					else{ $_SESSION['mombre']='mombre'; 

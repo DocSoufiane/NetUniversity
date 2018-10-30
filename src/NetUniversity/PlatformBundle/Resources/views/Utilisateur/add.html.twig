@@ -1,0 +1,79 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}
+<div style="    width: 48%;    margin-left: 31%;">
+
+  <div class="w3-container w3-blue">
+    <h2>Input Form</h2>
+  </div>
+  {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+  <!-- <form class="w3-container"> -->
+    
+    <p>  
+      {{ form_label(form.prenom, "Prénom", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.prenom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.prenom) }}
+    </p>
+    <p>
+      {{ form_label(form.nom, "Nom", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.nom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.nom) }}
+    <p>
+      {{ form_label(form.username, "eMail", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.username, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.username) }}
+    </p>
+    <p>
+      {{ form_label(form.email, "Retaper l'eMail", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.email, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.email) }}
+    </p>
+    <p>
+      {{ form_label(form.password, "Mot de passe", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.password, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.password) }}
+    </p>
+    <p>
+      {{ form_label(form.type, "Type", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.type, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.type) }}
+    </p>
+    <p>
+      {{ form_label(form.age, "Age", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.age, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.age) }}
+    </p>
+     <p>
+      {{ form_label(form.university, "University", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.university, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.university) }}
+    </p>
+     <p>
+      {{ form_label(form.localisation, "Localisation", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.localisation, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.localisation) }}
+    </p>
+     <p>
+      {{ form_label(form.file, "Photo", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.file, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.file) }}
+    </p>
+
+ {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+
+ {#  ////////////////////////////////////////. #}
+
+  {# {{ form(form) }} #}
+</div>
+
+{% endblock %}

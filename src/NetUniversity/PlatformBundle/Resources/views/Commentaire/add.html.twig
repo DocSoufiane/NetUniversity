@@ -1,0 +1,34 @@
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+	<div class="box-footer">
+	  {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+	<!-- <form class="w3-container"> -->
+
+	<img class="img-responsive img-circle img-sm" src="{{ app.user.urlIMAGE}}" alt="Alt Text">
+	<!-- .img-push is used to add margin to elements next to floating images -->
+	 <div class="img-push">
+	    
+	 
+    <p>  
+      {{ form_widget(form.comment, {'attr': {'class': '', 'style': ''}}) }}
+      {{ form_errors(form.comment) }}
+    </p>
+    
+           
+  	{{ form_rest(form) }}
+
+ 	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  	{{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+
+	</div>
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+
+	 
+	    
+	   
+	</div>
+	{% endif %}
+	</div>

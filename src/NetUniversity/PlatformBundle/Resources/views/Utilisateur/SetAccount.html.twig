@@ -1,0 +1,96 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}
+<div style="    width: 48%;    margin-left: 31%;">
+
+  <div class="w3-container w3-blue">
+    <h2>Input Form</h2>
+  </div>
+  {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+  <!-- <form class="w3-container"> -->
+    
+    <p>  
+      {{ form_label(form.prenom, "Prénom", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.prenom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.prenom) }}
+    </p>
+    <p>
+      {{ form_label(form.nom, "Nom", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.nom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.nom) }}
+    <p>
+      {{ form_label(form.username, "eMail", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.username, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.username) }}
+    </p>
+    <p>
+      {{ form_label(form.email, "Retaper l'eMail", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.email, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.email) }}
+    </p>
+
+   	<p>
+      {{ form_label(form.university, "University", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.university, {'attr': {'class': 'w3-input field-university'} }) }} {# , 'onclick': 'getInstitut(' Utilisateur.id ', ' path('getInstitutById', {id: Utilisateur.id}) ')')'  #}
+      {{ form_errors(form.university) }}
+     {# <td><inputid="Utilisateur{{ Utilisateur.id }}" class="js-switch" onclick="getInstitut({{ Utilisateur.id }}, '{{ path('getInstitutById', {id: Utilisateur.id}) }}')"></td> #}
+    </p> 
+    <div class="field-institut-wrapper">
+    	<label>institut</label>
+    	<div>
+    		<select class="field-institut" name="netuniversity_platformbundle_utilisateur[institut]"></select>
+    	</div>
+    </div>
+     <p>
+      {{ form_label(form.localisation, "Localisation", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.localisation, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.localisation) }}
+    </p>
+    
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+ {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+
+ {#  ////////////////////////////////////////. #}
+
+  {# {{ form(form) }} #}
+</div>
+
+
+<script>
+
+    function getInstitut(id, pathUrl){
+
+      //vals = $("#Utilisateur_"+id).is(':checked');
+      var role = $("#Utilisateur_"+id+":checked").val();
+      $.ajax({
+
+        url:pathUrl,
+        type: "POST",
+        dataType: "json",
+
+        data: {
+        "University-id" : id,
+        "checkbox-value" :role,
+        },
+
+        async: true,
+        success: function (data)
+        {
+        }
+
+      });
+    }
+
+</script>
+
+{% endblock %}
