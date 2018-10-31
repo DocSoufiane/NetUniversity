@@ -21,10 +21,7 @@ abstract class Support
      */
     private $id;
 
-    /**
-    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"})
-    */
-    private $recherche;
+
 
     /**
      * @var string
@@ -54,6 +51,11 @@ abstract class Support
      */
     private $type;
 
+  /**
+   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, mappedBy="support")
+   * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
+   */
+  private $classePartage;
 
     /**
     * @ORM\Column(name="urlFile", type="string", length=255)
@@ -234,6 +236,8 @@ abstract class Support
         $this->urlIMAGE = '../uploads/img/'.$name.$this->id;
 
       }
+
+
 
 
 }

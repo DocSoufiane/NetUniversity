@@ -18,7 +18,13 @@ class Sujet
    * @ORM\JoinColumn(nullable=false)
    */
     private $utilisateur;
-    
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", inversedBy="sujet")
+   * @ORM\JoinColumn(nullable=false)
+   */
+    private $classe;
+
     /**
      * @var int
      *
@@ -209,5 +215,29 @@ class Sujet
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Set classe.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Classe $classe
+     *
+     * @return Sujet
+     */
+    public function setClasse(\NetUniversity\PlatformBundle\Entity\Classe $classe)
+    {
+        $this->Classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Classe
+     */
+    public function getClasse()
+    {
+        return $this->Classe;
     }
 }

@@ -10,4 +10,5 @@ namespace NetUniversity\PlatformBundle\Repository;
  */
 class ClasseRepository extends \Doctrine\ORM\EntityRepository
 {
+	
 }

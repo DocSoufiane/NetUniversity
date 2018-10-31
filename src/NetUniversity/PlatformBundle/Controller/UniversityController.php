@@ -24,6 +24,7 @@ use NetUniversity\PlatformBundle\Form\InstitutType;
 use NetUniversity\PlatformBundle\Repository\UniversityRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //use Symfony\Component\Validator\Constraints\DateTime;
@@ -46,7 +47,17 @@ class UniversityController extends Controller
 			      ->getManager()
 			      ->getRepository('NetUniversityPlatformBundle:University');
 			    $University = $repository->find($id);
+				$liste_Instituts= array(""); 
+				$Instituts=$this->getDoctrine()->getManager()->getRepository('NetUniversityPlatformBundle:Institut')->getInstitutByUniversity($University->getId());
+			       
+		       	
+	         foreach($Instituts as $Institut)
+	         {
+	         	$Institut=array('InstitutNom'=> $Institut->getNom(), 'InstitutID'=> $Institut->getId());
+	            array_push($liste_Instituts, $Institut);
+	         }
 
+  return new JsonResponse($liste_Instituts);
 
 	        										//= $University->getInstitut();
 //$Instituts=$this
@@ -64,10 +75,11 @@ class UniversityController extends Controller
 			//$reports = $serializer->serialize($University, 'json');
 			//return new Response($reports);
 		
-		$serializer = $this->get('serializer');
-        $response = $serializer->serialize($University,'json');
+		//$serializer = $this->get('serializer');
+        //$response = $serializer->serialize($University,'json');
 
-        return new Response($response);
+       // return new Response($response);
+
 
 		//	$response = new Response(json_encode(array('Instituts' => $Instituts)));
 		//	$response->headers->set('Content-Type', 'application/json');

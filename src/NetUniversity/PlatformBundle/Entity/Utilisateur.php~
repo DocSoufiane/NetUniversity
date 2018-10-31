@@ -54,6 +54,12 @@ class Utilisateur extends BaseUser
     private $Filiere;
   
     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", inversedBy="Etudiant")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $classe;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -250,29 +256,7 @@ class Utilisateur extends BaseUser
         return $this->age;
     }
 
-    /**
-     * Set location.
-     *
-     * @param string $location
-     *
-     * @return User
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
 
-        return $this;
-    }
-
-    /**
-     * Get location.
-     *
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
 
     /**
      * Set dernierevisite.
@@ -316,79 +300,10 @@ class Utilisateur extends BaseUser
         return $Contacts; */
     }
 
-    /**
-     * Set publication.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $publication
-     *
-     * @return Utilisateur
-     */
-    public function setPublication($publication)
-    {
-        $this->publication = $publication;
 
-        return $this;
-    }
-
-    /**
-     * Get publication.
-     *
-     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
-     */
-    public function getPublication()
-    {
-        return $this->publication;
-    }
   // Notez le singulier, on ajoute une seule catégorie à la fois
 
-    /**
-     * Add category.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Localisation $localisation
-     *
-     * @return Utilisateur
-     */
-  public function addLocalisation(Localisation $localisation)
-  {
-    // Ici, on utilise l'ArrayCollection vraiment comme un tableau
-    $this->localisation[] = $localisation;
-  }
-
-    /**
-     * Add category.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Category $category
-     *
-     * @return Utilisateur
-     */
-    public function addCategory(\NetUniversity\PlatformBundle\Entity\Category $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Category $category
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeCategory(\NetUniversity\PlatformBundle\Entity\Category $category)
-    {
-        return $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
+ 
 
     /**
      * Set localisation.

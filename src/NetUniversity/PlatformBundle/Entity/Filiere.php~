@@ -56,6 +56,13 @@ class Filiere
    */
       private $module;
 
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", mappedBy="filiere")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $classe;
+
  // /**
  //  * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Filiere", inversedBy="sousfiliere")
  //  * @ORM\JoinColumn(nullable=false)
@@ -278,4 +285,49 @@ class Filiere
     {
         return $this->sousfiliere;
     } 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->module = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add module.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Module $module
+     *
+     * @return Filiere
+     */
+    public function addModule(\NetUniversity\PlatformBundle\Entity\Module $module)
+    {
+        $this->module[] = $module;
+
+        return $this;
+    }
+
+    /**
+     * Remove module.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Module $module
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeModule(\NetUniversity\PlatformBundle\Entity\Module $module)
+    {
+        return $this->module->removeElement($module);
+    }
+
+    /**
+     * Get module.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getModule()
+    {
+        return $this->module;
+    }
+
+
 }

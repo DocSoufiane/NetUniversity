@@ -153,6 +153,10 @@ addCours:
     path: /Cours/Add
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddCours} 
 
+addClasse:
+    path: /Classe/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Classe:Add} 
+
 ListeUniversity:
     path: /Universities
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeUniversity}
@@ -200,6 +204,13 @@ ViewCours:
     path: /Cours/{CoursId}
     defaults: 
       _controller: NetUniversityPlatformBundle:Utilisateur:afficheCours
+    requirements:
+      id: \d+
+
+viewClasse:
+    path: /Classe/{ClasseId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Classe:view
     requirements:
       id: \d+
 
@@ -284,3 +295,20 @@ gestionCompt:
 getInstitutById:
     path: /getInstitutById
     defaults: { _controller: NetUniversityPlatformBundle:University:getInstitutById}
+
+ListeThemes:
+    path: /Forum
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
+
+afficheSujet:
+    path: /Forum/Subject/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
+
+SupportPrivilege:
+    path: /Cours/PRIVILEGE/{CoursId}
+    defaults: { _controller: NetUniversityPlatformBundle:Support:GestionPrivilege}
+
+SupportPrivilegeAdd:
+    path: /Cours/PRIVILEGE/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Support:addPrivilege}
+    

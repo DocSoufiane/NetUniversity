@@ -1,0 +1,32 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}
+<div style="    width: 48%;    margin-left: 31%;">
+
+  <div class="w3-container w3-blue">
+    <h2>Ajouter une Classe :</h2>
+  </div>
+  {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+  <!-- <form class="w3-container"> -->
+    
+    <p>
+      {{ form_label(form.nom, "Nom", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.nom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.nom) }}
+   
+     <p>
+      {{ form_label(form.filiere, "Filiere", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.filiere, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.filiere) }}
+    </p>
+
+  {{ form_rest(form) }}
+
+  {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+  {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

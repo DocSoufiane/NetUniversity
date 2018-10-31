@@ -54,6 +54,12 @@ class Utilisateur extends BaseUser
     private $Filiere;
   
     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", inversedBy="Etudiant")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $classe;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -515,5 +521,29 @@ class Utilisateur extends BaseUser
     public function getFiliere()
     {
         return $this->Filiere;
+    }
+
+    /**
+     * Set classe.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Classe|null $classe
+     *
+     * @return Utilisateur
+     */
+    public function setClasse(\NetUniversity\PlatformBundle\Entity\Classe $classe = null)
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Classe|null
+     */
+    public function getClasse()
+    {
+        return $this->classe;
     }
 }

@@ -4,6 +4,7 @@ namespace NetUniversity\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Classe
  *
@@ -27,6 +28,44 @@ class Classe
      * @ORM\Column(name="Nom", type="string", length=255)
      */
     private $nom;
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", mappedBy="classe")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $sujet;
+
+   /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Filiere", inversedBy="classe")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $filiere;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDeCreation", type="datetime", nullable=true)
+     */
+    private $dateDeCreation;
+
+    /**
+   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $owner;
+
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", mappedBy="classe")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $Etudiant;
+
+
+  /**
+   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Support", cascade={"persist"}, inversedBy="classePartage")
+   * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
+   */
+  private $support;
 
 
     /**
@@ -61,5 +100,156 @@ class Classe
     public function getNom()
     {
         return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sujet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return Classe
+     */
+    public function addSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet[] = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Remove sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        return $this->sujet->removeElement($sujet);
+    }
+
+    /**
+     * Get sujet.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
+    }
+
+    /**
+     * Set dateDeCreation.
+     *
+     * @param \DateTime|null $dateDeCreation
+     *
+     * @return Classe
+     */
+    public function setDateDeCreation($dateDeCreation = null)
+    {
+        $this->dateDeCreation = $dateDeCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDeCreation.
+     *
+     * @return \DateTime|null
+     */
+    public function getDateDeCreation()
+    {
+        return $this->dateDeCreation;
+    }
+
+    /**
+     * Set filiere.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Filiere $filiere
+     *
+     * @return Classe
+     */
+    public function setFiliere(\NetUniversity\PlatformBundle\Entity\Filiere $filiere)
+    {
+        $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    /**
+     * Get filiere.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Filiere
+     */
+    public function getFiliere()
+    {
+        return $this->filiere;
+    }
+
+    /**
+     * Set owner.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $owner
+     *
+     * @return Classe
+     */
+    public function setOwner(\NetUniversity\PlatformBundle\Entity\Utilisateur $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Add etudiant.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $etudiant
+     *
+     * @return Classe
+     */
+    public function addEtudiant(\NetUniversity\PlatformBundle\Entity\Utilisateur $etudiant)
+    {
+        $this->Etudiant[] = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Remove etudiant.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $etudiant
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEtudiant(\NetUniversity\PlatformBundle\Entity\Utilisateur $etudiant)
+    {
+        return $this->Etudiant->removeElement($etudiant);
+    }
+
+    /**
+     * Get etudiant.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtudiant()
+    {
+        return $this->Etudiant;
     }
 }
