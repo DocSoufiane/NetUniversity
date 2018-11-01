@@ -102,11 +102,74 @@ class UtilisateurController extends Controller
 
 	public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
 	{
+			
+
+
+
 			$passwordEncoder = $this->get('security.password_encoder');
-		    $user = New Utilisateur();
-		    $form   = $this->get('form.factory')->create(UtilisateurType::class, $user);
+		    $userF = New Utilisateur();
+		    $form   = $this->get('form.factory')->create(UtilisateurType::class, $userF);
 
 		    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+
+
+
+			      $userManager = $this->get('fos_user.user_manager');
+
+			      // Or you can use the doctrine entity manager if you want instead the fosuser manager
+			      // to find 
+			      //$em = $this->getDoctrine()->getManager();
+			      //$usersRepository = $em->getRepository("mybundleuserBundle:User");
+			      // or use directly the namespace and the name of the class 
+			      // $usersRepository = $em->getRepository("mybundle\userBundle\Entity\User");
+			      //$email_exist = $usersRepository->findOneBy(array('email' => $email));
+			      
+			      $email_exist = $userManager->findUserByEmail($request->get('email'));
+
+			      // Check if the user exists to prevent Integrity constraint violation error in the insertion
+			      if($email_exist){
+			          return false;
+			      }
+
+			      $user = $userManager->createUser();
+
+
+			     // dump($this->get('request')->request->get('username'));die;
+			      //dump();die;
+			      $user->setUsername($form->getData()->getusername());
+			      $user->setEmail($form->getData()->getemail());
+			      $user->setEmailCanonical($form->getData()->getemail());
+			      //$user->setLocked(0); // don't lock the user
+			      $user->setEnabled(1); // enable the user or enable it later with a confirmation token in the email
+			      // this method will encrypt the password with the default settings :)
+			      $user->setPlainPassword($form->getData()->getpassword());
+			      $userManager->updateUser($user);
+			      	$userF= $user;
+				    $date = new \DateTime();
+	      			$userF->setDateDinscription($date);
+	      			$userF->upload();
+			     	$em = $this->getDoctrine()->getManager();
+			      	$em->persist($userF);
+			      	//$em->persist($user);
+			      	$em->flush();
+
+			      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+			      return $this->redirectToRoute('utilisateurview', array('UserId' => $userF->getId()));
+
+				     // return true;
+
+
+
+
+
+
+
+
+
+
+
 		    	$password = $passwordEncoder->encodePassword($user, $user->getPassword());
 				$user->setPassword($password);
 		    	$date = new \DateTime();

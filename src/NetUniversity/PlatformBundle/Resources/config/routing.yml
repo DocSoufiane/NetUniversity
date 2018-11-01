@@ -10,33 +10,10 @@ index:
 authentication:
     path: /Authentification
     defaults: { _controller: NetUniversityPlatformBundle:Authentification:index }
-cendage:
-    path: /Cendage
-    defaults: { _controller: NetUniversityPlatformBundle:Cendage:index }
-#contacts:
-#    path: /Contacts
-#    defaults: { _controller: NetUniversityPlatformBundle:Contacts:index }
 forum:
     path: /Forum
     defaults: { _controller: NetUniversityPlatformBundle:Forum:index }
-gestionClasse:
-    path: /Classe
-    defaults: { _controller: NetUniversityPlatformBundle:GestionClasse:index }
-gestion:
-    path: /Gestion
-    defaults: { _controller: NetUniversityPlatformBundle:Gestion:index }
-#university:
-#    path: /University
-#    defaults: { _controller: NetUniversityPlatformBundle:GestionUniversity:index }
-#institut:
-#    path: Institut
-#    defaults: { _controller: NetUniversityPlatformBundle:GestionInstitut:index }
-#deppartement:
-#    path: /Deppartement
-#    defaults: { _controller: NetUniversityPlatformBundle:GestionDeppartement:index }
-#filier:
-#    path: /Filier
-#    defaults: { _controller: NetUniversityPlatformBundle:GestionFilier:index }
+
 utilisateur:
     path: /User
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:index }
@@ -165,6 +142,34 @@ ListeContacts:
     path: /Contacts
     defaults: { _controller: NetUniversityPlatformBundle:Contact:listeContacts}
 
+ListeInstitut:
+    path: /Instituts
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeInstitut}
+
+ListeDepartement:
+    path: /Deppartements
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeDepartement}
+
+ListeFiliere:
+    path: /Filieres
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeFiliere}
+
+ListeModule:
+    path: /Modules
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeModule}
+
+ListeCours:
+    path: /Cours
+    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeCours}
+
+ListeCoursEdition:
+    path: /Liste/Edition/Cours/
+    defaults: { _controller: NetUniversityPlatformBundle:Support:mylisteCoursEdition}
+
+ListeThemes:
+    path: /Forum
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
+    
 ViewUniversity:
     path: /University/{UniversityId}
     defaults: 
@@ -214,29 +219,6 @@ ViewClasse:
     requirements:
       id: \d+
 
-ListeInstitut:
-    path: /Instituts
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeInstitut}
-
-ListeDepartement:
-    path: /Deppartements
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeDepartement}
-
-ListeFiliere:
-    path: /Filieres
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeFiliere}
-
-ListeModule:
-    path: /Modules
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeModule}
-
-ListeCours:
-    path: /Cours
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeCours}
-
-ListeCoursEdition:
-    path: /Liste/Edition/Cours/
-    defaults: { _controller: NetUniversityPlatformBundle:Support:mylisteCoursEdition}
 
 indexMail:
     path: /Mail
@@ -304,10 +286,6 @@ gestionCompt:
 getInstitutById:
     path: /getInstitutById
     defaults: { _controller: NetUniversityPlatformBundle:University:getInstitutById}
-
-ListeThemes:
-    path: /Forum
-    defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
 
 afficheSujet:
     path: /Forum/Subject/{Id}
