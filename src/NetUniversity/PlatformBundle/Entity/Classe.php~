@@ -62,7 +62,7 @@ class Classe
 
 
   /**
-   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Support", cascade={"persist"}, inversedBy="classePartage")
+   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="classePartage")
    * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
    */
   private $support;
@@ -251,5 +251,41 @@ class Classe
     public function getEtudiant()
     {
         return $this->Etudiant;
+    }
+
+    /**
+     * Add support.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Support $support
+     *
+     * @return Classe
+     */
+    public function addSupport(\NetUniversity\PlatformBundle\Entity\Support $support)
+    {
+        $this->support[] = $support;
+
+        return $this;
+    }
+
+    /**
+     * Remove support.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Support $support
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSupport(\NetUniversity\PlatformBundle\Entity\Support $support)
+    {
+        return $this->support->removeElement($support);
+    }
+
+    /**
+     * Get support.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSupport()
+    {
+        return $this->support;
     }
 }

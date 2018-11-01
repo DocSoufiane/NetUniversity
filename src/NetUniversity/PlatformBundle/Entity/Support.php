@@ -51,11 +51,6 @@ abstract class Support
      */
     private $type;
 
-  /**
-   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, mappedBy="support")
-   * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
-   */
-  private $classePartage;
 
     /**
     * @ORM\Column(name="urlFile", type="string", length=255)
@@ -245,42 +240,6 @@ abstract class Support
      */
     public function __construct()
     {
-        $this->classePartage = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add classePartage.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Classe $classePartage
-     *
-     * @return Support
-     */
-    public function addClassePartage(\NetUniversity\PlatformBundle\Entity\Classe $classePartage)
-    {
-        $this->classePartage[] = $classePartage;
-
-        return $this;
-    }
-
-    /**
-     * Remove classePartage.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Classe $classePartage
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeClassePartage(\NetUniversity\PlatformBundle\Entity\Classe $classePartage)
-    {
-        return $this->classePartage->removeElement($classePartage);
-    }
-
-    /**
-     * Get classePartage.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getClassePartage()
-    {
-        return $this->classePartage;
-    }
 }

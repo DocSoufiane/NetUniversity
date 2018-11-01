@@ -108,6 +108,10 @@ class ClasseController extends Controller
 		 return $this->render('NetUniversityPlatformBundle:Classe:Add.html.twig', array('form' => $form->createView()));
 	}
 
+	public function GestionEtudiants(Request $request){
+		
+	}
+	
 	public function listeContactsAction(Request $request)
 	{
 			$Contacts = $this

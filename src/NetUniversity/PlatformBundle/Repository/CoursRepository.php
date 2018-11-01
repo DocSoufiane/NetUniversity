@@ -11,6 +11,18 @@ namespace NetUniversity\PlatformBundle\Repository;
 class CoursRepository extends \Doctrine\ORM\EntityRepository
 {
 
-	
+	public function findByEditor( $User)
+	{
+	  $qb = $this->createQueryBuilder('a');
+
+	  $qb->where('a.utilisateur = :User ')
+	       ->setParameter('User', $User)
+	  ;
+
+	  return $qb
+	    ->getQuery()
+	    ->getResult()
+	  ;
+	}
 
 }

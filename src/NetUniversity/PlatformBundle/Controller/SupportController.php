@@ -61,7 +61,7 @@ class SupportController extends Controller
 	      throw new AccessDeniedException('Accès limité aux Profs.');
 	    }
 	    $em = $this->getDoctrine()->getManager();
-    	$Support = $em->getRepository('NetUniversityPlatformBundle:Cours')->findById($CoursId);
+    	$Support = $em->getRepository('NetUniversityPlatformBundle:Cours')->findOneById($CoursId);
     	$ListeClasses = $em->getRepository('NetUniversityPlatformBundle:Classe')->findAll();
 
     	//$user->getProducts()->contains($product)
@@ -82,26 +82,46 @@ class SupportController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$id = $request->get('Classe-id');
+		$Support_id = $request->get('Support-id');
 		$isChecked = $request->get('checkbox-value');
 
 		//$Cours = $this->CoursRepository->findById($id);
 	    $Classe = $em->getRepository('NetUniversityPlatformBundle:Classe')->find($id);
+	    $Support = $em->getRepository('NetUniversityPlatformBundle:Cours')->find($Support_id);
 
 		//$likeNEW = $Cours->getlike()+1;		
 		
 			
 				
 			if ($isChecked == "true") {
-				$Classe->addSupport($this->getUser());
+				DUMP('true');
+				$Classe->addSupport($Support);
 			} 
 			elseif ($isChecked == "false") {
-				$Classe->removeSupport($this->getUser());
+				dump('false');
+				$Classe->removeSupport($Support);
 			}
+			//die;
 
 			
 		$em->flush();
 		return new Response('Role updated successfully');
 
+
+	}
+
+	public function mylisteCoursEditionAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		    // La méthode findAll retourne toutes les catégories de la base de données
+	    $listeCours = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('NetUniversityPlatformBundle:Cours')
+            ->findByEditor($this->getUser())
+          ;
+
+		return $this->render('NetUniversityPlatformBundle:Cours:liste.html.twig', array('listeCours' => $listeCours));  
 
 	}
 

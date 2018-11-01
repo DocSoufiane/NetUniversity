@@ -51,11 +51,6 @@ abstract class Support
      */
     private $type;
 
-  /**
-   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, mappedBy="support")
-   * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
-   */
-  private $classePartage;
 
     /**
     * @ORM\Column(name="urlFile", type="string", length=255)
@@ -239,5 +234,12 @@ abstract class Support
 
 
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
 
 }

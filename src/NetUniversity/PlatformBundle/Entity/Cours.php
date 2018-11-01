@@ -57,6 +57,11 @@ class Cours
     */
     private $like;
 
+  /**
+   * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, mappedBy="support")
+   * @ORM\JoinTable(name="netuniversity_Support_PartageAvec_Classe")
+   */
+  private $classePartage;
 
     /**
      * @var string
@@ -353,6 +358,7 @@ class Cours
         $this->Commentaire = new \Doctrine\Common\Collections\ArrayCollection();
         $this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
         $this->like = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->classePartage = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
 
@@ -517,4 +523,40 @@ class Cours
 
 
 
+
+    /**
+     * Add classePartage.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Classe $classePartage
+     *
+     * @return Cours
+     */
+    public function addClassePartage(\NetUniversity\PlatformBundle\Entity\Classe $classePartage)
+    {
+        $this->classePartage[] = $classePartage;
+
+        return $this;
+    }
+
+    /**
+     * Remove classePartage.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Classe $classePartage
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeClassePartage(\NetUniversity\PlatformBundle\Entity\Classe $classePartage)
+    {
+        return $this->classePartage->removeElement($classePartage);
+    }
+
+    /**
+     * Get classePartage.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClassePartage()
+    {
+        return $this->classePartage;
+    }
 }

@@ -37,6 +37,11 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+
+            {% if Support is not null %}
+            
+            
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -53,15 +58,15 @@
                 {% for Classe in ListeClasses %}
 
                 <tr>
-                  <td>{{ Classe.Nom }}</td>
-                  <td>{{ Classe.filiere.Nom }}</td>
-                  <td>{{ Classe.filiere.departement.nom }}</td>
-                  <td>{{ Classe.filiere.departement.institut.nom }}</td>
-                  <td>{{ Classe.filiere.departement.institut.University.name }}</td>
+                  <td><a href="{{ path('ViewClasse', {'ClasseId': Classe.id }) }}"> {{ Classe.Nom }}</a></td>
+                  <td><a href="{{ path('ViewFiliere', {'FiliereId': Classe.filiere.id }) }}"> {{ Classe.filiere.Nom }} </a></td>
+                  <td><a href="{{ path('ViewDepartement', {'DepartementId': Classe.filiere.departement.id }) }}">{{ Classe.filiere.departement.nom }} </a></td>
+                  <td><a href="{{ path('ViewInstitut', {'InstitutId': Classe.filiere.departement.institut.id }) }}">{{ Classe.filiere.departement.institut.nom }} </a></td>
+                  <td><a href="{{ path('ViewUniversity', {'UniversityId': Classe.filiere.departement.institut.University.id }) }}">{{ Classe.filiere.departement.institut.University.name }} </a></td>
 
                   <td>
                     <label>
-                    <input type="checkbox" id="AutoriseClasse{{ Classe.id }}" class="js-switch" {{ Support in Classe.support ? 'checked' : '' }} onclick="changePrivilege({{ Classe.id }}, '{{ path('SupportPrivilegeAdd', {ClasseId: Classe.id, SupportId: Support.id }) }}')"/>
+                    <input type="checkbox" id="AutoriseClasse{{ Classe.id }}" class="js-switch" {{ Support in Classe.support ? 'checked' : '' }} onclick="changePrivilege({{ Classe.id }}, {{ Support.id }}, '{{path('SupportPrivilegeAdd')}}')"/>
                     </label>
                   </td>
 
@@ -82,6 +87,9 @@
                 </tr>
                 </tfoot>
               </table>
+              {% else %}
+                N/A
+            {% endif %}
             </div>
             <!-- /.box-body -->
           </div>
@@ -124,9 +132,9 @@
 
 <script>
 
-    function changePrivilege(id, pathUrl){
+    function changePrivilege(Classeid, Supportid, pathUrl){
 
-      vals = $("#AutoriseClasse"+id).is(':checked');
+      vals = $("#AutoriseClasse"+Classeid).is(':checked');
      
       //var role = $("#AutoriseClasse"+id+":checked").val();
       $.ajax({
@@ -136,7 +144,8 @@
         dataType: "json",
 
         data: {
-        "Classe-id" : id,
+        "Classe-id" : Classeid,
+        "Support-id" : Supportid,
         "checkbox-value" :vals,
         },
 

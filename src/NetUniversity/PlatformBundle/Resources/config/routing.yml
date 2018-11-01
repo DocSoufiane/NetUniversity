@@ -207,7 +207,7 @@ ViewCours:
     requirements:
       id: \d+
 
-viewClasse:
+ViewClasse:
     path: /Classe/{ClasseId}
     defaults: 
       _controller: NetUniversityPlatformBundle:Classe:view
@@ -233,6 +233,10 @@ ListeModule:
 ListeCours:
     path: /Cours
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeCours}
+
+ListeCoursEdition:
+    path: /Liste/Edition/Cours/
+    defaults: { _controller: NetUniversityPlatformBundle:Support:mylisteCoursEdition}
 
 indexMail:
     path: /Mail
@@ -278,7 +282,12 @@ Recherche:
 
 GestionRole:
     path: /ADMIN/GestionRole
-    defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:GestionRole}
+    defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:GestionEtudiants}
+
+
+GestionEtudiants:
+    path: /Classe/{ClasseId}/Gestion/Etudiants
+    defaults: { _controller: NetUniversityPlatformBundle:Classe:GestionRole}
 
 set-ROLE:
     path: /ADMIN/GestionRole/SET
@@ -305,7 +314,7 @@ afficheSujet:
     defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
 
 SupportPrivilege:
-    path: /Cours/PRIVILEGE/{CoursId}
+    path: /Cours/PRIVILEGE/ID/{CoursId}
     defaults: { _controller: NetUniversityPlatformBundle:Support:GestionPrivilege}
 
 SupportPrivilegeAdd:
