@@ -34,14 +34,11 @@ class UtilisateurType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', FileType::class)
-            ->add('prenom',     TextType::class)
+        $builder->add('prenom',     TextType::class)
           ->add('nom',     TextType::class)
           ->add('username',   EmailType::class)
           ->add('email',   EmailType::class)
           ->add('password',    PasswordType::class)
-          ->add('type',    TextType::class)
-          ->add('age',    NumberType::class)
          // ->add('dernierevisite',    DateTimeType::class, array('placeholder' => new \DateTime("now")))
           //->add('dateDinscription',  DateTimeType::class, array('placeholder' => new \DateTime("now")))
           //->add('published', CheckboxType::class)

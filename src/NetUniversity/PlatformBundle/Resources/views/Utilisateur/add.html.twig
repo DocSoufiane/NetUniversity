@@ -34,27 +34,14 @@
       {{ form_widget(form.password, {'attr': {'class': 'w3-input'}}) }}
       {{ form_errors(form.password) }}
     </p>
-    <p>
-      {{ form_label(form.type, "Type", {'label_attr': {'class': ''}}) }}
-      {{ form_widget(form.type, {'attr': {'class': 'w3-input'}}) }}
-      {{ form_errors(form.type) }}
-    </p>
-    <p>
-      {{ form_label(form.age, "Age", {'label_attr': {'class': ''}}) }}
-      {{ form_widget(form.age, {'attr': {'class': 'w3-input'}}) }}
-      {{ form_errors(form.age) }}
-    </p>
+   
 
      <p>
       {{ form_label(form.localisation, "Localisation", {'label_attr': {'class': ''}}) }}
       {{ form_widget(form.localisation, {'attr': {'class': 'w3-input'}}) }}
       {{ form_errors(form.localisation) }}
     </p>
-     <p>
-      {{ form_label(form.file, "Photo", {'label_attr': {'class': ''}}) }}
-      {{ form_widget(form.file, {'attr': {'class': 'w3-input'}}) }}
-      {{ form_errors(form.file) }}
-    </p>
+    
 
  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
   {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}

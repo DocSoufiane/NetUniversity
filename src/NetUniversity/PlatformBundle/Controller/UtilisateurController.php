@@ -125,7 +125,7 @@ class UtilisateurController extends Controller
 			      // $usersRepository = $em->getRepository("mybundle\userBundle\Entity\User");
 			      //$email_exist = $usersRepository->findOneBy(array('email' => $email));
 			      
-			      $email_exist = $userManager->findUserByEmail($request->get('email'));
+			      $email_exist = $userManager->findUserByEmail($form->getData()->getemail());
 
 			      // Check if the user exists to prevent Integrity constraint violation error in the insertion
 			      if($email_exist){
@@ -133,22 +133,27 @@ class UtilisateurController extends Controller
 			      }
 
 			      $user = $userManager->createUser();
+			      $useF = $userManager->createUser();
 
 
 			     // dump($this->get('request')->request->get('username'));die;
 			      //dump();die;
-			      $user->setUsername($form->getData()->getusername());
-			      $user->setEmail($form->getData()->getemail());
-			      $user->setEmailCanonical($form->getData()->getemail());
+			     // $user->setUsername($form->getData()->getusername());
+			     // $user->setEmail($form->getData()->getemail());
+			      //$user->setEmailCanonical($form->getData()->getemail());
 			      //$user->setLocked(0); // don't lock the user
-			      $user->setEnabled(1); // enable the user or enable it later with a confirmation token in the email
+			      //$user->setEnabled(1); // enable the user or enable it later with a confirmation token in the email
 			      // this method will encrypt the password with the default settings :)
-			      $user->setPlainPassword($form->getData()->getpassword());
-			      $userManager->updateUser($user);
-			      	$userF= $user;
+			      //$user->setPlainPassword($form->getData()->getpassword());
+			      	$userF->setUsername($form->getData()->getusername());
+			      	$userF->setEmail($form->getData()->getemail());
+			      	$userF->setEmailCanonical($form->getData()->getemail());
+			      	$userF->setEnabled(1);
+			      	$userF->setPlainPassword($form->getData()->getpassword());
 				    $date = new \DateTime();
 	      			$userF->setDateDinscription($date);
 	      			$userF->upload();
+	      						      $userManager->updateUser($userF);
 			     	$em = $this->getDoctrine()->getManager();
 			      	$em->persist($userF);
 			      	//$em->persist($user);
