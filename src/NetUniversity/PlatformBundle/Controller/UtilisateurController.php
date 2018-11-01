@@ -103,7 +103,9 @@ class UtilisateurController extends Controller
 	public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
 	{
 			
-
+		if($this->getUser()){
+			return $this->redirectToRoute('fos_user_security_logout');
+		}
 
 
 			$passwordEncoder = $this->get('security.password_encoder');
@@ -135,16 +137,6 @@ class UtilisateurController extends Controller
 			      $user = $userManager->createUser();
 			      $useF = $userManager->createUser();
 
-
-			     // dump($this->get('request')->request->get('username'));die;
-			      //dump();die;
-			     // $user->setUsername($form->getData()->getusername());
-			     // $user->setEmail($form->getData()->getemail());
-			      //$user->setEmailCanonical($form->getData()->getemail());
-			      //$user->setLocked(0); // don't lock the user
-			      //$user->setEnabled(1); // enable the user or enable it later with a confirmation token in the email
-			      // this method will encrypt the password with the default settings :)
-			      //$user->setPlainPassword($form->getData()->getpassword());
 			      	$userF->setUsername($form->getData()->getusername());
 			      	$userF->setEmail($form->getData()->getemail());
 			      	$userF->setEmailCanonical($form->getData()->getemail());
@@ -162,31 +154,6 @@ class UtilisateurController extends Controller
 			      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
 			      return $this->redirectToRoute('utilisateurview', array('UserId' => $userF->getId()));
-
-				     // return true;
-
-
-
-
-
-
-
-
-
-
-
-		    	$password = $passwordEncoder->encodePassword($user, $user->getPassword());
-				$user->setPassword($password);
-		    	$date = new \DateTime();
-      			$user->setDateDinscription($date);
-      			$user->upload();
-		     	$em = $this->getDoctrine()->getManager();
-		      	$em->persist($user);
-		      	$em->flush();
-
-		      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
-		      return $this->redirectToRoute('utilisateurview', array('UserId' => $user->getId()));
 
 		/*
 

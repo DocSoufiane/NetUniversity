@@ -10,9 +10,6 @@ index:
 authentication:
     path: /Authentification
     defaults: { _controller: NetUniversityPlatformBundle:Authentification:index }
-forum:
-    path: /Forum
-    defaults: { _controller: NetUniversityPlatformBundle:Forum:index }
 
 utilisateur:
     path: /User
@@ -169,7 +166,7 @@ ListeCoursEdition:
 ListeThemes:
     path: /Forum
     defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
-    
+
 ViewUniversity:
     path: /University/{UniversityId}
     defaults: 

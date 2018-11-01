@@ -53,8 +53,8 @@
                 {% if Classes %}
                   {% for Classe in Classes %}
 
-                    {% if Classes.Sujet %}
-                      {% for Sujet in Classes.Sujet %}
+                    {% if Classe.Sujet != null %}
+                      {% for Sujet in Classe.Sujet %}
                         <tr>
                           <td><a href="{{path('ViewCours', {'SujetId' : Sujet.id})}}">{{ Sujet.Nom }}</a></td>
                           <td><a href="{{path('utilisateurview', {'UserId' : Sujet.Utilisateur.id})}}">{{ Sujet.Utilisateur.Nom }}</a></td>
