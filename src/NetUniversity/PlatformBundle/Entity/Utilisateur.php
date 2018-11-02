@@ -38,6 +38,13 @@ class Utilisateur extends BaseUser
     private $University;
 
     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\University", inversedBy="owner")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $MyUniversity;
+
+
+    /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Institut", inversedBy="utilisateur")
    * @ORM\JoinColumn(nullable=true)
    */
@@ -553,5 +560,29 @@ class Utilisateur extends BaseUser
     public function getClasse()
     {
         return $this->classe;
+    }
+
+    /**
+     * Set myUniversity.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\University|null $myUniversity
+     *
+     * @return Utilisateur
+     */
+    public function setMyUniversity(\NetUniversity\PlatformBundle\Entity\University $myUniversity = null)
+    {
+        $this->MyUniversity = $myUniversity;
+
+        return $this;
+    }
+
+    /**
+     * Get myUniversity.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\University|null
+     */
+    public function getMyUniversity()
+    {
+        return $this->MyUniversity;
     }
 }

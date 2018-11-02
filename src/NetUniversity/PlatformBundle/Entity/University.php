@@ -30,7 +30,7 @@ class University
       private $utilisateur;
 
     /**
-   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"}, mappedBy="MyUniversity")
    * @ORM\JoinColumn(nullable=true)
    */
       private $owner;
@@ -72,12 +72,14 @@ class University
      */
     private $dateCreation;
 
+    
     /**
-     * @var \bool
+     * @var bool
      *
-     * @ORM\Column(name="valid", type="bool", options={"default":false})
+     * @ORM\Column(name="valid", type="boolean")
      */
     private $valid;
+
 
     
     /**
@@ -381,14 +383,16 @@ class University
         return $this->owner;
     }
 
+
+
     /**
      * Set valid.
      *
-     * @param \bool $valid
+     * @param bool $valid
      *
      * @return University
      */
-    public function setValid(\bool $valid)
+    public function setValid($valid)
     {
         $this->valid = $valid;
 
@@ -398,7 +402,7 @@ class University
     /**
      * Get valid.
      *
-     * @return \bool
+     * @return bool
      */
     public function getValid()
     {

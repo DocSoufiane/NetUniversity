@@ -38,6 +38,13 @@ class Utilisateur extends BaseUser
     private $University;
 
     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\University", inversedBy="owner")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $MyUniversity;
+
+
+    /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Institut", inversedBy="utilisateur")
    * @ORM\JoinColumn(nullable=true)
    */

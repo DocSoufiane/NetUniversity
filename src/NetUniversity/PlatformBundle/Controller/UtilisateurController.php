@@ -465,6 +465,8 @@ public function AddUniversityAction(Request $request)
 		    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 		    	$date = new \DateTime();
       			$university->setdateCreation($date);
+      			$Valid=false;
+      			$university->setValid($Valid);
       			$university->upload();
 				    $user = $this->getUser();
 				    $university->setOwner($user);
@@ -473,17 +475,15 @@ public function AddUniversityAction(Request $request)
 		      	$em->flush();
 
 		      $request->getSession()->getFlashBag()->add('notice', 'Université bien créée.');
- 
-		      return $this->redirectToRoute('ViewUniversity', array('UniversityId' => $university->getid())); 
-			
-		    $em = $this->getDoctrine()->getManager();
-		    $em->persist($user);
-		    $em->flush();
+ 				$Notif="La demande de création de n'université est bien créer !";
+		      //return $this->redirectToRoute('ViewUniversity', array('UniversityId' => $university->getid())); 
+				   	return $this->redirectToRoute('Notif', array('Notif' => $Notif));
+
+		   
 
 	}
-	   // return $this->render('NetUniversityPlatformBundle:University:add.html.twig', array('form' => $form->createView(),));
+	    return $this->render('NetUniversityPlatformBundle:University:add.html.twig', array('form' => $form->createView(),));
 	   
-	   	return $this->redirectToRoute('Notif', array('Notif' => $Notif));
 
 	}
 
