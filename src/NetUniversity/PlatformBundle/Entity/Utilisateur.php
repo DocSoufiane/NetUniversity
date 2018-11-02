@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use NetUniversity\PlatformBundle\Repository\ContactsRepository;
 use Doctrine\ORM\EntityRepository;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use NetUniversity\UserBundle;
@@ -354,7 +356,13 @@ class Utilisateur extends BaseUser
         return $this->University;
     }
 
-
+    /**
+     * @Assert\File(
+     *     maxSize = "15024k",
+     *     mimeTypes = {"image/png", "image/vnd.sealedmedia.softseal.jpg", "video/JPEG"},
+     *     mimeTypesMessage = "Tail maximal 15 Mo | type de fichier acceptés (jpg, png, jpeg)"
+     * )
+     */
   private $file;
   
   public function getFile()

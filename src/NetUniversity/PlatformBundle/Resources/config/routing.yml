@@ -216,6 +216,12 @@ ViewClasse:
     requirements:
       id: \d+
 
+RemoveCours:
+    path: /Remove/Cours/{CoursId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Support:RemoveSupport
+    requirements:
+      id: \d+
 
 indexMail:
     path: /Mail
@@ -296,3 +302,10 @@ SupportPrivilegeAdd:
     path: /Cours/PRIVILEGE/Add
     defaults: { _controller: NetUniversityPlatformBundle:Support:addPrivilege}
     
+Error:
+    path: /Error/{Error}
+    defaults: { _controller: NetUniversityPlatformBundle:Error:Introuvable}  
+
+Notif:
+    path: /Notif/{Notif}
+    defaults: { _controller: NetUniversityPlatformBundle:Error:Notif}  

@@ -467,7 +467,7 @@ public function AddUniversityAction(Request $request)
       			$university->setdateCreation($date);
       			$university->upload();
 				    $user = $this->getUser();
-				    $university->setUtilisateur($user);
+				    $university->setOwner($user);
 		     	$em = $this->getDoctrine()->getManager();
 		      	$em->persist($university);
 		      	$em->flush();
@@ -475,18 +475,15 @@ public function AddUniversityAction(Request $request)
 		      $request->getSession()->getFlashBag()->add('notice', 'Université bien créée.');
  
 		      return $this->redirectToRoute('ViewUniversity', array('UniversityId' => $university->getid())); 
-		
-	    $em = $this->getDoctrine()->getManager();
-	    $em->persist($user);
-	    $em->flush();
+			
+		    $em = $this->getDoctrine()->getManager();
+		    $em->persist($user);
+		    $em->flush();
 
-	    if ($request->isMethod('POST')) {
-	      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
-	      return $this->redirectToRoute('user', array('id' => $user->getId()));
-	    }
 	}
-	    return $this->render('NetUniversityPlatformBundle:University:add.html.twig', array('form' => $form->createView(),));
+	   // return $this->render('NetUniversityPlatformBundle:University:add.html.twig', array('form' => $form->createView(),));
+	   
+	   	return $this->redirectToRoute('Notif', array('Notif' => $Notif));
 
 	}
 
@@ -912,12 +909,12 @@ public function afficheInstitutAction($InstitutId)
 
 			// On récupère l'annonce $id
 			$Cours = $em->getRepository('NetUniversityPlatformBundle:Cours')->find($CoursId);
-		 	$Prof=$Cours->getUtilisateur();
-
 			if (null === $Cours) {
-			  throw new NotFoundHttpException("La Cours d'id ".$CoursId." n'existe pas.");
+				$Error = "La Cours d'id ".$CoursId." n'existe pas.";
+				return $this->redirectToRoute('Error', array('Error'=> $Error));
 			}
-			
+
+			$Prof=$Cours->getUtilisateur();
           $like=0;
           foreach ($Cours->getLike() as $User){
 				if($this->getUser()== $User){

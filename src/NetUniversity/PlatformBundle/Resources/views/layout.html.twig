@@ -52,7 +52,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ path('index')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>N{# </b>LT #}</span>
       <!-- logo for regular state and mobile devices -->
@@ -344,17 +344,17 @@
       </div>
 
 
-      {{ render(controller("NetUniversityPlatformBundle:Recherche:recherche")) }} 
-      <!-- search form 
-      <form action="#" method="get" class="sidebar-form">
+     {# {{ render(controller("NetUniversityPlatformBundle:Recherche:recherche")) }}  #}
+      <!-- search form -->
+      <form action="{{ path('Recherche')}}" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="MotCle" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
-      </form>-->-->
+      </form>
       <!-- /.search form 
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">

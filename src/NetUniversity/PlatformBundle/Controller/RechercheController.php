@@ -59,27 +59,28 @@ class RechercheController extends Controller
 	public function rechercheAction(Request $request)
 	{
 
-
 	    $Recherche = New Recherche();
-	    $form   = $this->get('form.factory')->create(RechercheType::class, $Recherche);
+	 //   $form   = $this->get('form.factory')->create(RechercheType::class, $Recherche);
 	    //dump($request->isMethod('POST'));
 	    //dump($form->handleRequest($request)->isValid());die;
-	    
-	    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-		//$stack = array();
+	    			
 
-			$resultat = explode ( " " , htmlspecialchars(mb_strtolower($request->get('recherche'))));
+	    if ($request->isMethod('GET') ) {
+		$stack = array();
+
+			$resultat = explode ( " " , htmlspecialchars(mb_strtolower($request->get('MotCle'))));
 
 			$em = $this->getDoctrine()->getManager();
 
 	    	$result = $em->getRepository('NetUniversityPlatformBundle:Recherche')->findAll();
 
 			//$result = $participation->query('SELECT * FROM mur WHERE activation= 1 ORDER BY id DESC');
-				
+			
 			foreach ($result as $don) {
 				
 				$mots = explode ( " ", htmlspecialchars($don->getMotCle()));
 				$r=0;$v=0;
+			
 
 				while($r<count($mots))
 				{
@@ -93,14 +94,12 @@ class RechercheController extends Controller
 					array_push($stack, $don);
 				}
 			}
-
 			return $this->render('NetUniversityPlatformBundle:Recherche:resultat.html.twig', array('resultat' => $stack));
 
 		}
-//return $this->render('NetUniversityPlatformBundle:Module:add.html.twig', array('form' => $form->createView(),));
 
+		return $this->redirectToRoute('index');  
 
-		return $this->render('NetUniversityPlatformBundle:Recherche:form.html.twig', array('form' => $form->createView(),));
 	}
 
 }

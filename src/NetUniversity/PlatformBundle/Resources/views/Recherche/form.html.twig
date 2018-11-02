@@ -1,22 +1,13 @@
-  <!-- search form -->
+<form action="{{ path('Recherche')}}" method="get" class="sidebar-form">
+  <div class="input-group">
+    <input type="text" name="MotCle" class="form-control" placeholder="Search...">
+    <span class="input-group-btn">
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+          </button>
+        </span>
+  </div>
+</form>
 
-    {{ form_start(form, {'attr': {'class': 'sidebar-form'}}) }}
-    {{ form_errors(form) }}
-
-        <div class="input-group">
-    
-      {{ form_widget(form.recherche, {'attr': {'class': 'form-control', 'placeholder':'Search...'}}) }}
-      {{ form_errors(form.recherche) }}
-          
-              <span class="input-group-btn">
-                 {{ form_rest(form) }}
-				          {{ form_widget(form.save, {'attr': {'class': 'btn btn-flat', 'id': 'search-btn', }}) }}
-              </span>
-
-        </div>
-
-
-  {{ form_end(form) }}
 
 
 {#

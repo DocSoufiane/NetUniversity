@@ -17,9 +17,7 @@
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <div class="widget-user-image">
-                <img class="img-circle" src="../upload/img/cours.png" alt="{{ Cours.nom }}">
-              </div>
+
               <!-- /.widget-user-image -->
               <a style ="color:#FFF;" href="{{ path('ViewCours', {'CoursId' : Cours.id}) }}"><h3 class="widget-user-username">{{ Cours.nom }}</h3></a>
               <h5 class="widget-user-desc">{{ Cours.utilisateur.nom }} {{ Cours.utilisateur.prenom }}        
@@ -33,7 +31,9 @@
                 <li><a href="#">Profs <span class="pull-right badge bg-green">1</span></a></li>
                 <li><a href="#">Module <span class="pull-right badge bg-green">{{ Cours.Module.Count }}</span></a></li>
                 <li><a href="#">Classes <span class="pull-right badge bg-green">{{ Cours.classePartage.Count }}</span></a></li>
+                <li><a href="#">Like <span class="pull-right badge bg-green">{{ Cours.like.Count }}</span></a></li>
                 <li><a href="#">Étudiants <span class="pull-right badge bg-red">842</span></a></li>
+                {# <li><a href="#">Étudiants <span class="pull-right badge bg-red">842</span></a></li>. #}
               </ul>
             </div>
           </div>

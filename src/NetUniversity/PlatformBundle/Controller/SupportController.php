@@ -155,7 +155,37 @@ class SupportController extends Controller
 	}
 
 
+	public function RemoveSupportAction($CoursId)
+	{
 
+
+		if (!isset($CoursId)) {
+      		throw new NotFoundHttpException("Le Filière n'existe pas.");
+    		}
+    	else{
+
+			$em = $this->getDoctrine()->getManager();
+
+
+			// On récupère l'annonce $id
+			$Cours = $em->getRepository('NetUniversityPlatformBundle:Cours')->find($CoursId);
+		 	$Prof=$Cours->getUtilisateur();
+
+			if (null === $Cours) {
+			  throw new NotFoundHttpException("La Cours d'id ".$CoursId." n'existe pas.");
+			}
+
+			if ($Prof == $Cours->getutilisateur()) {
+			      	$em->remove($Cours);
+			      	//$em->persist($user);
+			      	$em->flush();
+ 			return $this->redirectToRoute('utilisateurview', array('UserId' => $Prof->getId()));
+
+			}
+
+ 			return $this->redirectToRoute('ViewCours', array('CoursId' => $Cours->getId()));
+		}
+	}
 
 
 

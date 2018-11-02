@@ -95,6 +95,11 @@
               <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+              {% if app.user.id == Cours.utilisateur.id %}
+              <a href="{{ path('RemoveCours', {'CoursId':Cours.id}) }}" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+              {% endif %}
+              {% endif %}
             </ul>
             <div class="tab-content">
             <div class="tab-pane" id="timeline">
@@ -347,11 +352,13 @@
                     <ul class="list-inline">
                     <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
                     <label>
+
                     <input type="checkbox" id="likeCours_{{ Cours.id }}" class="js-switch" {{ like == 1 ? 'checked' : '' }} onclick="likeChangeForCours({{ Cours.id }}, '{{ path('like_Cours', {id: Cours.id}) }}')"/>
+
                     </label>
 
                     <li><a href="#"  id="likeCours_{{ Cours.id }}" onclick="likeChangeForCours({{ Cours.id }}, '{{ path('like_Cours', {id: Cours.id}) }}')"
-                    class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> <span class="pull-right badge bg-green">{{ Cours.like.Count }}</span></a>
                     </li>
                     <li class="pull-right">
                       <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments

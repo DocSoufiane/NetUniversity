@@ -28,8 +28,13 @@ class Recherche
      */
     private $MotCle;
 
-  private $recherche;
+  //private $recherche;
   
+      /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="recherche")
+    */
+    private $cours;
+
   public function getRecherche()
   {
     return $this->recherche;
@@ -74,4 +79,28 @@ class Recherche
         return $this->MotCle;
     }
 
+
+    /**
+     * Set cours.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Cours|null $cours
+     *
+     * @return Recherche
+     */
+    public function setCours(\OC\PlatformBundle\Entity\Cours $cours = null)
+    {
+        $this->cours = $cours;
+
+        return $this;
+    }
+
+    /**
+     * Get cours.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Cours|null
+     */
+    public function getCours()
+    {
+        return $this->cours;
+    }
 }

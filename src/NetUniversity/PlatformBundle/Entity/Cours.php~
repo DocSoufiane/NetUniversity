@@ -94,6 +94,11 @@ class Cours
     */
     private $DateDeCreation;
 
+    /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, mappedBy="cours")
+    */
+    private $recherche;
+
 
   private $file;
   

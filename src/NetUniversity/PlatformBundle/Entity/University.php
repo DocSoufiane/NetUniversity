@@ -4,6 +4,8 @@ namespace NetUniversity\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * University
@@ -28,6 +30,12 @@ class University
       private $utilisateur;
 
     /**
+   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+   * @ORM\JoinColumn(nullable=true)
+   */
+      private $owner;
+
+    /**
    * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Institut", mappedBy="university")
    * @ORM\JoinColumn(nullable=false)
    */
@@ -50,17 +58,40 @@ class University
     private $name;
 
     /**
+     * @var string
+     *
+     * @Assert\Choice(choices={"Réel", "Virtuel"}, message="Choose a valid genre. (Réel | Virtuel)")
+     * @ORM\Column(name="genre", type="string", length=255)
+     */
+    private $genre; // reel/ virtuel
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
+
+    /**
+     * @var \bool
+     *
+     * @ORM\Column(name="valid", type="bool", options={"default":false})
+     */
+    private $valid;
+
     
     /**
     * @ORM\Column(name="urlIMAGE", type="string", length=255)
     */
     private $urlIMAGE;
 
+    /**
+     * @Assert\File(
+     *     maxSize = "15024k",
+     *     mimeTypes = {"image/png", "image/vnd.sealedmedia.softseal.jpg", "video/JPEG"},
+     *     mimeTypesMessage = "Tail maximal 15 Mo | type de fichier acceptés (jpeg, jpg, png)"
+     * )
+     */
   private $file;
   
   public function getFile()
@@ -300,5 +331,77 @@ class University
     public function removeUtilisateur(\NetUniversity\PlatformBundle\Entity\Utilisateur $utilisateur)
     {
         return $this->utilisateur->removeElement($utilisateur);
+    }
+
+    /**
+     * Set genre.
+     *
+     * @param string $genre
+     *
+     * @return University
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * Get genre.
+     *
+     * @return string
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * Set owner.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $owner
+     *
+     * @return University
+     */
+    public function setOwner(\NetUniversity\PlatformBundle\Entity\Utilisateur $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Set valid.
+     *
+     * @param \bool $valid
+     *
+     * @return University
+     */
+    public function setValid(\bool $valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid.
+     *
+     * @return \bool
+     */
+    public function getValid()
+    {
+        return $this->valid;
     }
 }

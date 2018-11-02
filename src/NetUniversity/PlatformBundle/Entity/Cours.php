@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * Cours
@@ -94,8 +97,20 @@ class Cours
     */
     private $DateDeCreation;
 
+    /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, mappedBy="cours")
+    */
+    private $recherche;
 
-  private $file;
+
+    /**
+     * @Assert\File(
+     *     maxSize = "15024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/vnd.comicbook-rar", "application/vnd.comicbook+zip", "image/png", "image/vnd.sealedmedia.softseal.jpg", "video/JPEG"},
+     *     mimeTypesMessage = "Tail maximal 15 Mo | type de fichier acceptés (PDF, zip, rar, jpeg, jpg, png)"
+     * )
+     */
+    private $file;
   
   public function getFile()
   {
@@ -559,4 +574,6 @@ class Cours
     {
         return $this->classePartage;
     }
+ 
+
 }
