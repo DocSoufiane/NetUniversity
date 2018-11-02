@@ -95,10 +95,6 @@ PROF:
     path: /PROF   
     defaults: { _controller: NetUniversityPlatformBundle:Home:index }
 
-ADMIN:
-    path: /ADMIN  
-    defaults: { _controller: NetUniversityPlatformBundle:Home:index }
-
 DOYEN:
     path: /DOYEN     
     defaults: { _controller: NetUniversityPlatformBundle:Home:index }
@@ -215,7 +211,10 @@ ViewClasse:
       _controller: NetUniversityPlatformBundle:Classe:view
     requirements:
       id: \d+
-
+afficheSujet:
+    path: /Forum/Subject/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
+    
 RemoveCours:
     path: /Remove/Cours/{CoursId}
     defaults: 
@@ -290,10 +289,6 @@ getInstitutById:
     path: /getInstitutById
     defaults: { _controller: NetUniversityPlatformBundle:University:getInstitutById}
 
-afficheSujet:
-    path: /Forum/Subject/{Id}
-    defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
-
 SupportPrivilege:
     path: /Cours/PRIVILEGE/ID/{CoursId}
     defaults: { _controller: NetUniversityPlatformBundle:Support:GestionPrivilege}
@@ -309,3 +304,6 @@ Error:
 Notif:
     path: /Notif/{Notif}
     defaults: { _controller: NetUniversityPlatformBundle:Error:Notif}  
+ADMIN:
+    path: /ADMIN
+    defaults: { _controller: NetUniversityPlatformBundle:Home:index}  
