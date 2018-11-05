@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * Cours
@@ -100,7 +103,14 @@ class Cours
     private $recherche;
 
 
-  private $file;
+    /**
+     * @Assert\File(
+     *     maxSize = "15024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/vnd.comicbook-rar", "application/vnd.comicbook+zip", "image/png", "image/vnd.sealedmedia.softseal.jpg", "video/JPEG"},
+     *     mimeTypesMessage = "Tail maximal 15 Mo | type de fichier acceptés (PDF, zip, rar, jpeg, jpg, png)"
+     * )
+     */
+    private $file;
   
   public function getFile()
   {
@@ -361,7 +371,7 @@ class Cours
     public function __construct()
     {
         $this->Commentaire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
         $this->like = new \Doctrine\Common\Collections\ArrayCollection();
         $this->classePartage = new \Doctrine\Common\Collections\ArrayCollection();
 
@@ -502,29 +512,6 @@ class Cours
         return $this->like->removeElement($like);
     }
 
-    /**
-     * Set recherche.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
-     *
-     * @return Support
-     */
-    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
-    {
-        $this->recherche = $recherche;
-
-        return $this;
-    }
-
-    /**
-     * Get recherche.
-     *
-     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
-     */
-    public function getRecherche()
-    {
-        return $this->recherche;
-    }
 
 
 
@@ -564,4 +551,6 @@ class Cours
     {
         return $this->classePartage;
     }
+ 
+
 }

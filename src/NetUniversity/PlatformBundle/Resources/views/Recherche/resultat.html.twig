@@ -50,13 +50,15 @@
                 <tbody>
                   {% if resultat %}
                   {% for element in resultat %}
-                  <tr>
-                    <td>{{ element.Cours.nom}}</td>
-                    <td>{{ element.Cours.utilisateur}}</td>
-                    <td>{{ element.Cours.derniereModif | date('F jS \\a\\t g:ia')}}</td>
-                    <td><span class="label label-success">Approved</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
+                    {% if element.Cours %}
+                    <tr>
+                      <td>{{ element.Cours.nom}}</td>
+                      <td>{{ element.Cours.utilisateur}}</td>
+                      <td>{{ element.Cours.derniereModif | date('F jS \\a\\t g:ia')}}</td>
+                      <td><span class="label label-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                    {% endif %}
                   {% endfor %}
 
                   {% else %}

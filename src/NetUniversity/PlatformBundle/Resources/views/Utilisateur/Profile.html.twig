@@ -13,7 +13,27 @@
 
               <h3 class="profile-username text-center">{{ Utilisateur.prenom }} {{ Utilisateur.nom }}</h3>
 
-              <p class="text-muted text-center">Software Engineer</p>
+              <p class="text-muted text-center">
+               {% if Utilisateur.roles[0] == "ROLE_ETUDIANT" %}  
+
+               {% elseif Utilisateur.roles[0] == "ROLE_PROF" %}
+               PROF
+               {% elseif Utilisateur.roles[0] == "ROLE_CHEF_FILIERE" %}
+               CHEFE FILIERE
+               {% elseif Utilisateur.roles[0] == "ROLE_CHEF_DEPPARTEMENT" %}
+               CHEFE DEPPARTEMENT
+               {% elseif Utilisateur.roles[0] == "ROLE_DIRECTEUR" %}
+               DIRECTEUR
+               {% elseif Utilisateur.roles[0] == "ROLE_DOYEN" %}
+               DOYEN
+               {% elseif Utilisateur.roles[0] == "ROLE_ADMIN" %}
+               ADMIN
+               {% elseif Utilisateur.roles[0] == "ROLE_SUPER_ADMIN" %}
+               SUPER ADMIN
+
+               {% endif %}
+
+               </p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">

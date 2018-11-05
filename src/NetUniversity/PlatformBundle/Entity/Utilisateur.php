@@ -123,6 +123,11 @@ class Utilisateur extends BaseUser
     */
     private $dernierevisite;
 
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Roles", mappedBy="user")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $role;
 
 
     /**
@@ -584,5 +589,15 @@ class Utilisateur extends BaseUser
     public function getMyUniversity()
     {
         return $this->MyUniversity;
+    }
+
+    /**
+     * Get role.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

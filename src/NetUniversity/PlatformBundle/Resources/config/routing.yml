@@ -214,7 +214,7 @@ ViewClasse:
 afficheSujet:
     path: /Forum/Subject/{Id}
     defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
-    
+
 RemoveCours:
     path: /Remove/Cours/{CoursId}
     defaults: 
@@ -264,10 +264,9 @@ Recherche:
     path: /Recherche
     defaults: { _controller: NetUniversityPlatformBundle:Recherche:recherche}
 
-GestionRole:
-    path: /ADMIN/GestionRole
-    defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:GestionEtudiants}
-
+GestionInstitut:
+    path: /Institut/{InstitutId}/Gestion
+    defaults: { _controller: NetUniversityPlatformBundle:Institut:Gestionindex}
 
 GestionEtudiants:
     path: /Classe/{ClasseId}/Gestion/Etudiants
@@ -306,4 +305,4 @@ Notif:
     defaults: { _controller: NetUniversityPlatformBundle:Error:Notif}  
 ADMIN:
     path: /ADMIN
-    defaults: { _controller: NetUniversityPlatformBundle:Home:index}  
+    defaults: { _controller: NetUniversityPlatformBundle:Gestion:index}  

@@ -98,7 +98,7 @@ class Cours
     private $DateDeCreation;
 
     /**
-    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, mappedBy="cours")
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, cascade={"remove"}, mappedBy="cours")
     */
     private $recherche;
 
@@ -371,7 +371,7 @@ class Cours
     public function __construct()
     {
         $this->Commentaire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->recherche = new \Doctrine\Common\Collections\ArrayCollection();
         $this->like = new \Doctrine\Common\Collections\ArrayCollection();
         $this->classePartage = new \Doctrine\Common\Collections\ArrayCollection();
 
@@ -512,29 +512,6 @@ class Cours
         return $this->like->removeElement($like);
     }
 
-    /**
-     * Set recherche.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
-     *
-     * @return Support
-     */
-    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
-    {
-        $this->recherche = $recherche;
-
-        return $this;
-    }
-
-    /**
-     * Get recherche.
-     *
-     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
-     */
-    public function getRecherche()
-    {
-        return $this->recherche;
-    }
 
 
 
@@ -576,4 +553,28 @@ class Cours
     }
  
 
+
+    /**
+     * Set recherche.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
+     *
+     * @return Cours
+     */
+    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
+    {
+        $this->recherche = $recherche;
+
+        return $this;
+    }
+
+    /**
+     * Get recherche.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
+     */
+    public function getRecherche()
+    {
+        return $this->recherche;
+    }
 }

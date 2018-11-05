@@ -1,4 +1,5 @@
-
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}    
 <div style="    WIDTH: 100%;" class="col-md-6">
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="nav-tabs-custom">
@@ -39,46 +40,46 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nom</th>
-                  <th>ROLE_ETUDIANT</th>
-                  <th>ROLE_PROF</th>
-                  <th>ROLE_CHEF_FILIERE</th>
-                  <th>ROLE_CHEF_DEPPARTEMENT</th>
-                  <th>ROLE_DIRECTEUR</th>
-                  <th>ROLE_DOYEN</th>
-                  <th>ROLE_ADMIN</th>
+                  <th>Classe</th>
+                  <th>Filière</th>
+                  <th>Déppartement</th>
+                  <th>Institut</th>
+                  <th>Université</th>
+                  <th>Privilège</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% if ListeUtilisateur %}
-                  {% for Utilisateur in ListeUtilisateur %}
-                    {% if app.user != Utilisateur %}
-                    <tr>
-                      <td>{{ Utilisateur.email }}</td>
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_ETUDIANT" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_ETUDIANT' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                {% if ListeClasses %}
+                {% for Classe in ListeClasses %}
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_PROF" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_PROF' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                <tr>
+                  <td>{{ Classe.Nom }}</td>
+                  <td>{{ Classe.filiere.Nom }}</td>
+                  <td>{{ Classe.filiere.departement.nom }}</td>
+                  <td>{{ Classe.filiere.departement.institut.nom }}</td>
+                  <td>{{ Classe.filiere.departement.institut.University.name }}</td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_CHEF_FILIERE" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_CHEF_FILIERE' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                  <td>
+                    <label>
+                    <input type="checkbox" id="AutoriseClasse{{ Classe.id }}" class="js-switch" 
+                    {{ (Support in Classe.support) ? 'checked' : '' }} onclick="changePrivilege({{ Classe.id }}, {{ Support.id }}, '{{ path('SupportPrivilegeAdd') }}')"/>
+                    </label>
+                  </td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_CHEF_DEPPARTEMENT" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_CHEF_DEPPARTEMENT' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
-
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_DIRECTEUR" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_DIRECTEUR' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
-
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_DOYEN" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_DOYEN' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
-
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_ADMIN" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_ADMIN' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
-
-                      
-                    </tr>
-                    {% endif %}
-                  {% endfor %}
+                  
+                </tr>
+                {% endfor %}
                 {% endif %}
                 
                 </tbody>
                 <tfoot>
                 <tr>
-                  
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                  <th>ROLE_DIRECTEUR</th>
                 </tr>
                 </tfoot>
               </table>
@@ -124,10 +125,11 @@
 
 <script>
 
-    function SetRoleForUtilisateur(id, pathUrl){
+    function changePrivilege(ClasseID, SupportID, pathUrl){
 
-      //vals = $("#Utilisateur_"+id).is(':checked');
-      var role = $("#Utilisateur_"+id+":checked").val();
+      vals = $("#AutoriseClasse"+id).is(':checked');
+     
+      //var role = $("#AutoriseClasse"+id+":checked").val();
       $.ajax({
 
         url:pathUrl,
@@ -135,8 +137,9 @@
         dataType: "json",
 
         data: {
-        "Utilisateur-id" : id,
-        "checkbox-value" :role,
+        "Classe-id" : ClasseID,
+        "Support-id" : SupportID,
+        "checkbox-value" :vals,
         },
 
         async: true,
@@ -148,3 +151,5 @@
     }
 
 </script>
+
+{% endblock %}

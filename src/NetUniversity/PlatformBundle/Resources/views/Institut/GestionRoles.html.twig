@@ -39,41 +39,50 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nom</th>
-                  <th>ROLE_ETUDIANT</th>
-                  <th>ROLE_PROF</th>
-                  <th>ROLE_CHEF_FILIERE</th>
-                  <th>ROLE_CHEF_DEPPARTEMENT</th>
-                  <th>ROLE_DIRECTEUR</th>
-                  <th>ROLE_DOYEN</th>
-                  <th>ROLE_ADMIN</th>
+                  <th>Nom Prénom</th>
+                  <th>eMail</th>
+                  <th>Lire</th>
+                  <th>Lire & Ecrire</th>
+                  
                 </tr>
                 </thead>
                 <tbody>
-                {% if ListeUtilisateur %}
-                  {% for Utilisateur in ListeUtilisateur %}
-                    {% if app.user != Utilisateur %}
-                    <tr>
-                      <td>{{ Utilisateur.email }}</td>
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_ETUDIANT" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_ETUDIANT' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+{#
+                      {% for Utilisateur in ListeUtilisateur %}
+                        {% if app.user != Utilisateur %}
+                          {% if  Utilisateur.role not in listroles %}
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_PROF" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_PROF' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                          <tr>
+                            <td>{{ Utilisateur.Nom }} {{ Utilisateur.Prenom }}</td>
+                            <td>{{ Utilisateur.email }}</td>
+                            <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="Lire" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_CHEF_FILIERE" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_CHEF_FILIERE' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                            <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="Ecrire" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_CHEF_DEPPARTEMENT" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_CHEF_DEPPARTEMENT' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                            
+                          </tr>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_DIRECTEUR" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_DIRECTEUR' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+#}
+                      {% if listroles %}
+                        {% for role in listroles %}
+                          {% if app.user != role.user %}
+                            <tr>
+                              <td>{{ role.user.Nom }} {{ role.user.Prenom }}</td>
+                              <td>{{ role.user.email }}</td>
+                              <td><input type="radio" name="Utilisateur{{ role.user.id }}" value="Lire" id="Utilisateur_{{ role.user.id }}" class="js-switch" {{  role.role=="Lire" ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ role.user.id }}, '{{ path('set-ROLE', {id: role.user.id}) }}')"></td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_DOYEN" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_DOYEN' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                              <td><input type="radio" name="Utilisateur{{ role.user.id }}" value="Ecrire" id="Utilisateur_{{ role.user.id }}" class="js-switch" {{  role.role=="Ecrire"  ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ role.user.id }}, '{{ path('set-ROLE', {id: role.user.id}) }}')"></td>
 
-                      <td><input type="radio" name="Utilisateur{{ Utilisateur.id }}" value="ROLE_ADMIN" id="Utilisateur_{{ Utilisateur.id }}" class="js-switch" {{  Utilisateur.roles[0]  == 'ROLE_ADMIN' ? 'checked' : '' }} onclick="SetRoleForUtilisateur({{ Utilisateur.id }}, '{{ path('set-ROLE', {id: Utilisateur.id}) }}')"></td>
+                              
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
 
                       
-                    </tr>
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
                 
                 </tbody>
                 <tfoot>

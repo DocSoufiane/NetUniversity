@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+
+
 /**
  * Institut
  *
@@ -38,6 +40,19 @@ class Institut
    * @ORM\JoinColumn(nullable=false)
    */
       private $utilisateur;
+
+    /**
+   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $owner;
+
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Roles", mappedBy="Institut")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $Roles;
 
     /**
      * @var int
@@ -331,5 +346,65 @@ class Institut
     public function removeUtilisateur(\NetUniversity\PlatformBundle\Entity\Utilisateur $utilisateur)
     {
         return $this->utilisateur->removeElement($utilisateur);
+    }
+
+    /**
+     * Add role.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Roles $role
+     *
+     * @return Institut
+     */
+    public function addRole(\NetUniversity\PlatformBundle\Entity\Roles $role)
+    {
+        $this->Roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Roles $role
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeRole(\NetUniversity\PlatformBundle\Entity\Roles $role)
+    {
+        return $this->Roles->removeElement($role);
+    }
+
+    /**
+     * Get roles.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->Roles;
+    }
+
+    /**
+     * Set owner.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $owner
+     *
+     * @return Institut
+     */
+    public function setOwner(\NetUniversity\PlatformBundle\Entity\Utilisateur $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

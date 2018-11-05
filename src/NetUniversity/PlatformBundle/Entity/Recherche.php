@@ -32,8 +32,19 @@ class Recherche
   
       /**
     * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="recherche")
+   * @ORM\JoinColumn(nullable=false)
     */
     private $cours;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        //$this->cours = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
 
   public function getRecherche()
   {
@@ -87,7 +98,7 @@ class Recherche
      *
      * @return Recherche
      */
-    public function setCours(\OC\PlatformBundle\Entity\Cours $cours = null)
+    public function setCours(\NetUniversity\PlatformBundle\Entity\Cours $cours = null)
     {
         $this->cours = $cours;
 

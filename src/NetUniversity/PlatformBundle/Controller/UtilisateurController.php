@@ -114,8 +114,9 @@ class UtilisateurController extends Controller
 
 		    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-
-
+				$role = [];
+				$role[] = "ROLE_ETUDIANT";
+				
 
 			      $userManager = $this->get('fos_user.user_manager');
 
@@ -144,6 +145,7 @@ class UtilisateurController extends Controller
 			      	$userF->setPlainPassword($form->getData()->getpassword());
 				    $date = new \DateTime();
 	      			$userF->setDateDinscription($date);
+	      			$userF->setRoles($role);
 	      			$userF->upload();
 	      						      $userManager->updateUser($userF);
 			     	$em = $this->getDoctrine()->getManager();
@@ -299,9 +301,12 @@ public function AddCoursAction(Request $request)
       			$Cours->upload();
 
 		     	$em = $this->getDoctrine()->getManager();
+		     	$em->persist($Cours);
+			    $Recherche->setcours($Cours);
+
 		     	$em->persist($Recherche);
-		     	$Cours->setRecherche($Recherche);
-		      	$em->persist($Cours);
+		     	
+		      	
 		      	$em->persist($Module);
 		      	$em->flush();
 
@@ -501,6 +506,7 @@ public function AddInstitutAction(Request $request)
 			      // Sinon on déclenche une exception « Accès interdit »
 			      throw new AccessDeniedException('Accès limité aux Doyen.');
 			    }
+
 			    $user=$this->getUser();
 				//$univs=$user->getUniversity();
 			    	
@@ -866,12 +872,13 @@ public function afficheInstitutAction($InstitutId)
 			// On récupère l'annonce $id
 			$Filiere = $em->getRepository('NetUniversityPlatformBundle:Filiere')->find($FiliereId);
 		 	$SousFilieres =$Filiere->getsousfiliere();
+		 	$Classes =$Filiere->getClasse();
 
 			if (null === $Filiere) {
 			  throw new NotFoundHttpException("La Filière d'id ".$FiliereId." n'existe pas.");
 			}
 
-    		return $this->render('NetUniversityPlatformBundle:Filiere:view.html.twig', array('Filiere'=> $Filiere, 'SousFilieres'=> $SousFilieres));
+    		return $this->render('NetUniversityPlatformBundle:Filiere:view.html.twig', array('Filiere'=> $Filiere, 'SousFilieres'=> $SousFilieres, 'Classes'=> $Classes));
 		}
 	}
 

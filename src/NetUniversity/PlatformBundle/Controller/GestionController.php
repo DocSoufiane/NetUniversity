@@ -11,8 +11,14 @@ class GestionController extends Controller
 {
     public function indexAction()
     {
-        return new Response("Page des Gestion !");
-    }
+	    if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+	      // Sinon on déclenche une exception « Accès interdit »
+	      throw new AccessDeniedException('Accès limité aux ADMINS.');
+	    }
+
+    		return $this->render('NetUniversityPlatformBundle:Gestion:index.html.twig');
+
+	}
 }
 
 ?>
