@@ -3,6 +3,7 @@
 
     <!-- Main content -->
     <section class="content">
+     <a href="{{ path('GestionDeppartement', {'DeppartementId': Departement.id}) }}"><i class="fa fa-gear"></i></a>
       <!-- Info boxes -->
       <div class="row">
       {#
@@ -21,7 +22,9 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Responsable de Deppartement</span>
-              <span class="info-box-number">{{ Departement.owner.Nom }}</span>
+              <span class="info-box-number"><a href="{{ path('utilisateurview', {'UserId': Departement.owner.id})}}">
+              {{ Departement.owner.Nom }}
+              </a></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -343,7 +346,7 @@
               <!-- USERS LIST -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Latest Members</h3>
+                  <h3 class="box-title">Filières</h3>
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger">8 New Members</span>

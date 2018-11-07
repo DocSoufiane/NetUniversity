@@ -21,7 +21,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Responsable d'institut</span>
-              <span class="info-box-number">{{ Institut.owner.Nom }}</span>
+              <span class="info-box-number"><a href="{{path('utilisateurview', {'UserId' : Institut.owner.id})}}">{{ Institut.owner.Nom }}</a></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -34,7 +34,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Université</span>
-              <span class="info-box-number">{{ Institut.University.Name }} </span>
+              <span class="info-box-number"><a href="{{path('ViewUniversity', {'UniversityId' : Institut.University.id})}}">{{ Institut.University.Name }}</a> </span>
               <span class="info-box-text"><h6> # </h6></span>
             </div>
             <!-- /.info-box-content -->
@@ -361,7 +361,12 @@
                       </li>
                     {% endfor %} 
                 {% endif %}
-                    
+                {% if is_granted('ROLE_DIRECTEUR') %}
+                <a href="{{path('addDepartement')}}" class="btn btn-app">
+                  <i class="fa fa-fw fa-plus"></i>Ajouter Déppartement
+                </a> 
+              {% endif %}
+                <hr>
                   </ul>
                   <!-- /.users-list -->
                 </div>

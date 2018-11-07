@@ -1,0 +1,64 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %} 
+<div class="row">
+        <div class="col-md-6" style="width: 100%;">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sujets de la Classe</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+
+<a class="btn btn-default btn-block">                <i class="fa fa-edit"></i> Edit              </a> </br>
+              {% if ListeSujets %}
+              {% for sujet in ListeSujets %}
+                <div class="panel box 
+                {% if sujet.etat=='OK' %}
+                box-success
+                {% else %}
+                box-danger
+                {% endif %}
+                ">
+                  <div class="box-header with-border">
+                    <h4 style="    float: left; " class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ sujet.id }}">
+                        {{sujet.nom}}
+                      </a>
+
+                    </h4>
+                 
+
+                    <h6 style="    float: left;     margin-left: 1%; ">
+                      {% if sujet.etat=='OK' %}
+                        <span  class="label label-success">Résolut</span>
+                      {% else %}
+                        <span  class="label label-danger">En attente</span>
+                      {% endif %}
+
+
+                    </h6>
+                  </div>
+                  <div id="collapse{{ sujet.id }}" class="panel-collapse collapse">
+                    <div class="box-body">
+                      {{sujet.detail}}
+                      <div class="box-footer text-center">
+                        <a href="{{ path('ForumSubject', {'Id': sujet.id})}}" class="uppercase">Voir plus de details</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+              {% endif %}
+
+        
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+{% endblock %}

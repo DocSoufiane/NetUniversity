@@ -105,15 +105,15 @@ addUniversity:
 
 addInstitut:
     path: /Institut/Add
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddInstitut } 
+    defaults: { _controller: NetUniversityPlatformBundle:Institut:AddInstitut } 
 
 addDepartement:
     path: /Deppartement/Add
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddDepartement } 
+    defaults: { _controller: NetUniversityPlatformBundle:Deppartement:AddDeppartement } 
 
 addFiliere:
     path: /Filiere/Add
-    defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:AddFiliere} 
+    defaults: { _controller: NetUniversityPlatformBundle:Filiere:AddFiliere} 
 
 addModule:
     path: /Module/Add
@@ -211,9 +211,33 @@ ViewClasse:
       _controller: NetUniversityPlatformBundle:Classe:view
     requirements:
       id: \d+
-afficheSujet:
+ForumSubject:
     path: /Forum/Subject/{Id}
-    defaults: { _controller: NetUniversityPlatformBundle:Forum:affiche}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewSubject}
+
+ForumClasse:
+    path: /Forum/Classe/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewClasse}
+
+ForumFiliere:
+    path: /Forum/Filiere/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewFiliere}
+
+ForumDeppartement:
+    path: /Forum/Deppartement/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewDeppartement}
+
+ForumInstitut:
+    path: /Forum/Institut/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewInstitut}
+
+ForumUniversity:
+    path: /Forum/University/{Id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewUniversity}
+
+ForumIndex:
+    path: /Forum
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:Index}
 
 RemoveCours:
     path: /Remove/Cours/{CoursId}
@@ -268,6 +292,10 @@ GestionInstitut:
     path: /Institut/{InstitutId}/Gestion
     defaults: { _controller: NetUniversityPlatformBundle:Institut:Gestionindex}
 
+GestionDeppartement:
+    path: /Deppartement/{DeppartementId}/Gestion
+    defaults: { _controller: NetUniversityPlatformBundle:Deppartement:Gestionindex}
+
 GestionEtudiants:
     path: /Classe/{ClasseId}/Gestion/Etudiants
     defaults: { _controller: NetUniversityPlatformBundle:Classe:GestionRole}
@@ -275,6 +303,10 @@ GestionEtudiants:
 set-ROLE:
     path: /ADMIN/GestionRole/SET
     defaults: { _controller: NetUniversityPlatformBundle:GestionUtilisateur:addRole}
+
+set_ROLE_ELEMENT:
+    path: /ADMIN/GestionRoleELEMENT/SET
+    defaults: { _controller: NetUniversityPlatformBundle:Gestion:addRole}
 
 ChangeContact:
     path: /Contact/SET
@@ -306,3 +338,8 @@ Notif:
 ADMIN:
     path: /ADMIN
     defaults: { _controller: NetUniversityPlatformBundle:Gestion:index}  
+
+checkMailAddresse:
+    path: /checkMailAddresse
+    defaults: { _controller: NetUniversityPlatformBundle:Institut:checkMailAddresse} 
+    

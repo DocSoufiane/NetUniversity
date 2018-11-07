@@ -48,6 +48,18 @@ class Roles
    */
     private $institut;
 
+     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Departement")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $departement;
+
+     /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Filiere")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $filiere;
+
     /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", inversedBy="role")
    * @ORM\JoinColumn(nullable=true)
@@ -182,5 +194,53 @@ class Roles
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set departement.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Departement|null $departement
+     *
+     * @return Roles
+     */
+    public function setDepartement(\NetUniversity\PlatformBundle\Entity\Departement $departement = null)
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * Get departement.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Departement|null
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+    /**
+     * Set filiere.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Filiere|null $filiere
+     *
+     * @return Roles
+     */
+    public function setFiliere(\NetUniversity\PlatformBundle\Entity\Filiere $filiere = null)
+    {
+        $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    /**
+     * Get filiere.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Filiere|null
+     */
+    public function getFiliere()
+    {
+        return $this->filiere;
     }
 }

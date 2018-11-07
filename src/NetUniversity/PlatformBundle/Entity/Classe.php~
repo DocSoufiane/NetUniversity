@@ -256,11 +256,11 @@ class Classe
     /**
      * Add support.
      *
-     * @param \NetUniversity\PlatformBundle\Entity\Support $support
+     * @param \NetUniversity\PlatformBundle\Entity\Cours $support
      *
      * @return Classe
      */
-    public function addSupport(\NetUniversity\PlatformBundle\Entity\Support $support)
+    public function addSupport(\NetUniversity\PlatformBundle\Entity\Cours $support)
     {
         $this->support[] = $support;
 
@@ -270,11 +270,11 @@ class Classe
     /**
      * Remove support.
      *
-     * @param \NetUniversity\PlatformBundle\Entity\Support $support
+     * @param \NetUniversity\PlatformBundle\Entity\Cours $support
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeSupport(\NetUniversity\PlatformBundle\Entity\Support $support)
+    public function removeSupport(\NetUniversity\PlatformBundle\Entity\Cours $support)
     {
         return $this->support->removeElement($support);
     }

@@ -80,6 +80,19 @@ class Filiere
     */
     private $urlIMAGE;    
 
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Roles", mappedBy="filiere")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $Roles;
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", mappedBy="classe")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $sujet;
+
   private $file;
 
     /**
@@ -365,5 +378,77 @@ class Filiere
     public function getClasse()
     {
         return $this->classe;
+    }
+
+    /**
+     * Add role.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Roles $role
+     *
+     * @return Filiere
+     */
+    public function addRole(\NetUniversity\PlatformBundle\Entity\Roles $role)
+    {
+        $this->Roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Roles $role
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeRole(\NetUniversity\PlatformBundle\Entity\Roles $role)
+    {
+        return $this->Roles->removeElement($role);
+    }
+
+    /**
+     * Get roles.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->Roles;
+    }
+
+    /**
+     * Add sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return Filiere
+     */
+    public function addSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet[] = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Remove sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        return $this->sujet->removeElement($sujet);
+    }
+
+    /**
+     * Get sujet.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
     }
 }

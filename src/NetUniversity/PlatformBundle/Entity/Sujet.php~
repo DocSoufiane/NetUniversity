@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Sujet
 {
 
-          /**
+    /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur")
    * @ORM\JoinColumn(nullable=false)
    */
@@ -21,9 +21,34 @@ class Sujet
 
     /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", inversedBy="sujet")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $classe;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Filiere", inversedBy="sujet")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $filiere;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Departement", inversedBy="sujet")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $deppartement;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Institut", inversedBy="sujet")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $institut;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\University", inversedBy="sujet")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $university;
+
 
     /**
      * @var int
@@ -40,6 +65,13 @@ class Sujet
      * @ORM\Column(name="Nom", type="string", length=255)
      */
     private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=255)
+     */
+    private $etat;
 
     /**
      * @var string
@@ -239,5 +271,101 @@ class Sujet
     public function getClasse()
     {
         return $this->Classe;
+    }
+
+    /**
+     * Set filiere.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Filiere $filiere
+     *
+     * @return Sujet
+     */
+    public function setFiliere(\NetUniversity\PlatformBundle\Entity\Filiere $filiere)
+    {
+        $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    /**
+     * Get filiere.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Filiere
+     */
+    public function getFiliere()
+    {
+        return $this->filiere;
+    }
+
+    /**
+     * Set deppartement.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Departement $deppartement
+     *
+     * @return Sujet
+     */
+    public function setDeppartement(\NetUniversity\PlatformBundle\Entity\Departement $deppartement)
+    {
+        $this->deppartement = $deppartement;
+
+        return $this;
+    }
+
+    /**
+     * Get deppartement.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Departement
+     */
+    public function getDeppartement()
+    {
+        return $this->deppartement;
+    }
+
+    /**
+     * Set institut.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Institut $institut
+     *
+     * @return Sujet
+     */
+    public function setInstitut(\NetUniversity\PlatformBundle\Entity\Institut $institut)
+    {
+        $this->institut = $institut;
+
+        return $this;
+    }
+
+    /**
+     * Get institut.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Institut
+     */
+    public function getInstitut()
+    {
+        return $this->institut;
+    }
+
+    /**
+     * Set university.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\University $university
+     *
+     * @return Sujet
+     */
+    public function setUniversity(\NetUniversity\PlatformBundle\Entity\University $university)
+    {
+        $this->university = $university;
+
+        return $this;
+    }
+
+    /**
+     * Get university.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\University
+     */
+    public function getUniversity()
+    {
+        return $this->university;
     }
 }

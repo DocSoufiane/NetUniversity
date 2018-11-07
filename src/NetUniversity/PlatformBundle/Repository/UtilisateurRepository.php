@@ -19,4 +19,14 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
     ;
 
 	}
+
+	public function getEmail()
+	{
+	       $qb = $this->createQueryBuilder('r')
+             ->select('r.email')
+             ->getQuery();
+
+     return $qb->getResult();
+	}
+
 }

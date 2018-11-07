@@ -55,6 +55,12 @@ class Institut
       private $Roles;
 
     /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", mappedBy="classe")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $sujet;
+      
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -406,5 +412,41 @@ class Institut
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Add sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return Institut
+     */
+    public function addSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        $this->sujet[] = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Remove sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        return $this->sujet->removeElement($sujet);
+    }
+
+    /**
+     * Get sujet.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSujet()
+    {
+        return $this->sujet;
     }
 }

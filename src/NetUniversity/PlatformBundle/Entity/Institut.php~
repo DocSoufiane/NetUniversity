@@ -55,6 +55,12 @@ class Institut
       private $Roles;
 
     /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", mappedBy="classe")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $sujet;
+      
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")

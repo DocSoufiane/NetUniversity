@@ -1,0 +1,7 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}    
+
+{{ render(controller("NetUniversityPlatformBundle:Deppartement:GestionRole", {'DeppartementId': DeppartementId})) }}
+
+
+{% endblock %}

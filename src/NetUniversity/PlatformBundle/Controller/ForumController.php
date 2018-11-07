@@ -46,26 +46,67 @@ class ForumController extends Controller
    	    return $this->render('NetUniversityPlatformBundle:Forum:ListeThemes.html.twig', array('Classes'=> $Classes));
 
     }
-	public function afficheAction($SubjectId){
 
 
-		if (!isset($SubjectId)) {
-      		throw new NotFoundHttpException("L'institut n'existe pas.");
+
+
+	public function ViewSubjectAction(Request $request, $Id)
+	{
+		if (!isset($Id)) {
+      		throw new NotFoundHttpException("Le sujet n'existe pas.");
     		}
     	else{
 		$em = $this->getDoctrine()->getManager();
 
 		// On récupère l'annonce $id
-		$Sujet = $em->getRepository('NetUniversityPlatformBundle:Institut')->find($SubjectId);
+		$Sujet = $em->getRepository('NetUniversityPlatformBundle:Sujet')->find($Id);
 
 			if (null === $Sujet) {
-			  throw new NotFoundHttpException("Le Departement d'id ".$SubjectId." n'existe pas.");
+			  throw new NotFoundHttpException("Le Departement d'id ".$Id." n'existe pas.");
 			}
 
     		return $this->render('NetUniversityPlatformBundle:Forum:view.html.twig', array('Sujet'=> $Sujet));
 		}
-	
 	}
+	public function ViewClasseAction(Request $request, $Id)
+	{
+
+    	$em = $this->getDoctrine()->getManager();
+
+
+			// On récupère l'annonce $id
+			$Classe = $em->getRepository('NetUniversityPlatformBundle:Classe')->find($Id);
+		 	
+			$ListeSujets=$Classe->getSujet();
+			//return new Response("Page de Forum !");
+   	    return $this->render('NetUniversityPlatformBundle:Forum:Liste.html.twig', array('ListeSujets'=> $ListeSujets));
+
+   	}
+	public function ViewFiliereAction($value='')
+	{
+		# code...
+	}
+	public function ViewDeppartementAction($value='')
+	{
+		# code...
+	}
+	public function ViewInstitutAction($value='')
+	{
+		# code...
+	}
+	public function ViewUniversityAction($value='')
+	{
+		# code...
+	}
+
+	public function afficheAction($SubjectId){
+
+
+
+
+	}
+
+
 
 }
 
