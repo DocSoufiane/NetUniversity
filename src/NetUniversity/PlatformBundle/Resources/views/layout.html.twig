@@ -415,7 +415,7 @@
         </li>
 
         <li class="treeview">
-            <a href="{{ path('ListeThemes') }}">
+            <a href="#">
            <i class="fa fa-fw fa-joomla"></i>
             <span>Forum</span>
             <span class="pull-right-container">
@@ -423,7 +423,11 @@
             </span>
           </a>
 
-         
+          <ul class="treeview-menu">
+            <li><a href="{{path('ForumIndex')}}"><i class="fa fa-circle-o"></i> Forum de ma classe</a></li>
+            <li><a href="{{path('ForumClasse', {'Id': 5})}}"><i class="fa fa-circle-o"></i> Classe5</a></li>
+          </ul>
+
         </li>
 
 
