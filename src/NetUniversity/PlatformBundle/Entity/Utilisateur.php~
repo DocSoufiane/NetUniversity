@@ -590,4 +590,14 @@ class Utilisateur extends BaseUser
     {
         return $this->MyUniversity;
     }
+
+    /**
+     * Get role.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

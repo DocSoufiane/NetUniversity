@@ -1,0 +1,49 @@
+{% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
+{% block contenu %}
+<div style="    width: 48%;    margin-left: 31%;">
+
+
+  <div class="w3-container w3-blue">
+    <h2> Ajouter un Sujet / une question: </h2>
+  </div>
+ {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
+    {{ form_errors(form) }}
+
+  <!-- <form class="w3-container"> -->
+    
+    <p>  
+      {{ form_label(form.nom, "Titre", {'label_attr': {'class': ''}}) }}
+      {{ form_widget(form.nom, {'attr': {'class': 'w3-input'}}) }}
+      {{ form_errors(form.nom) }}
+    </p>
+    <p>         
+    {{ form_label(form.detail, "detail", {'label_attr': {'class': ''}}) }}
+    {{ form_widget(form.detail, {'attr': {'id':'compose-textarea'}}) }}
+    {{ form_errors(form.detail) }}
+    </p>   
+    <div class="form-group">
+      <div class="btn btn-default btn-file">
+        <i class="fa fa-paperclip"></i> 
+        {{ form_label(form.file, "Fichier", {'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.file, {'attr': {'class': ''}}) }}
+        {{ form_errors(form.file) }}
+      </div>
+    <p class="help-block">Max. 15Mo | (PDF, zip, rar)</p>
+    </div>
+    {{ form_widget(form.groupe, {'attr': {'value': groupe }}) }}
+    {{ form_errors(form.groupe) }}
+
+    {{ form_widget(form.idgroupe, {'attr': {'value': idgroupe }}) }}
+    {{ form_errors(form.idgroupe) }}   
+
+  {{ form_rest(form) }}
+
+  {{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
+
+
+
+  {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

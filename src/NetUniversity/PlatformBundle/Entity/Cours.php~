@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 
+
 /**
  * Cours
  *
@@ -98,7 +99,7 @@ class Cours
     private $DateDeCreation;
 
     /**
-    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, mappedBy="cours")
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, cascade={"remove"}, mappedBy="cours")
     */
     private $recherche;
 
@@ -228,29 +229,6 @@ class Cours
         return $this->DateDeCreation;
     }
 
-    /**
-     * Set fichier.
-     *
-     * @param string $fichier
-     *
-     * @return Cours
-     */
-    public function setFichier($fichier)
-    {
-        $this->Fichier = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Get fichier.
-     *
-     * @return string
-     */
-    public function getFichier()
-    {
-        return $this->Fichier;
-    }
 
     /**
      * Set type.
@@ -552,5 +530,59 @@ class Cours
         return $this->classePartage;
     }
  
+
+
+    /**
+     * Set recherche.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
+     *
+     * @return Cours
+     */
+    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
+    {
+        $this->recherche = $recherche;
+
+        return $this;
+    }
+
+    /**
+     * Get recherche.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
+     */
+    public function getRecherche()
+    {
+        return $this->recherche;
+    }
+
+    /**
+     * Set Fichier.
+     *
+     * @param string $urlFile
+     *
+     * @return Support
+     */
+    public function setFichier($Fichier)
+    {
+        $this->Fichier = $Fichier;
+
+        return $this;
+    }
+
+    /**
+     * Get urlFile.
+     *
+     * @return string
+     */
+    public function getFichier()
+    {
+        return $this->Fichier;
+    }
+
+
+
+
+
 
 }

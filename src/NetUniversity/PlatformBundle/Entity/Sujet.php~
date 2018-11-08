@@ -4,6 +4,11 @@ namespace NetUniversity\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * Sujet
  *
@@ -20,7 +25,7 @@ class Sujet
     private $utilisateur;
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", inversedBy="sujet")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, inversedBy="sujet")
    * @ORM\JoinColumn(nullable=true)
    */
     private $classe;
@@ -49,7 +54,29 @@ class Sujet
    */
     private $university;
 
+    /**
+     * @Assert\File(
+     *     maxSize = "15024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/vnd.comicbook-rar", "application/vnd.comicbook+zip", "image/png", "image/vnd.sealedmedia.softseal.jpg", "video/JPEG"},
+     *     mimeTypesMessage = "Tail maximal 15 Mo | type de fichier acceptés (PDF, zip, rar, jpeg, jpg, png)"
+     * )
+     */
+    private $file;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Fichier", type="string", length=255, nullable=true)
+     */
+    private $Fichier; 
+
+
+    /**
+    * @ORM\ManyToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+    */
+    private $like;
+
+    
     /**
      * @var int
      *
@@ -94,6 +121,42 @@ class Sujet
      */
     private $dateDeModif;
 
+    /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Recherche", cascade={"persist"}, cascade={"remove"}, mappedBy="sujet")
+    */
+    private $recherche;
+
+   /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", mappedBy="sujet")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $Commentaire;
+
+
+private $idgroupe;
+
+public function getidgroupe()
+{
+return $this->idgroupe;
+}
+
+public function setidgroupe( $idgroupe)
+{
+$this->idgroupe = $idgroupe;
+}
+
+
+private $groupe;
+
+public function getgroupe()
+{
+return $this->groupe;
+}
+
+public function setgroupe( $groupe)
+{
+$this->groupe = $groupe;
+}
 
     /**
      * Get id.
@@ -104,6 +167,58 @@ class Sujet
     {
         return $this->id;
     }
+
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  public function setFile(UploadedFile $file = null)
+  {
+    $this->file = $file;
+  }
+
+
+    public function upload()
+      {
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->file) {
+          return;
+        }
+
+        // On récupère le nom original du fichier de l'internaute
+        $name = $this->file->getClientOriginalName();
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move($this->getUploadRootDir(), $name);
+
+        // On sauvegarde le nom de fichier dans notre attribut $url
+        $this->Fichier = '../uploads/Forum/'.$name.$this->id;
+        //$this->Cours = '../uploads/Forum/'.$name.$this->id;
+
+      }
+
+    public function getUploadDir()
+      {
+        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
+        return 'uploads/Forum';
+      }
+
+    protected function getUploadRootDir()
+      {
+        // On retourne le chemin relatif vers l'image pour notre code PHP
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+      }
+      
+  /**
+ * @ORM\PreUpdate
+ */  
+  public function updateDate()
+  {
+    $this->setDerniereModif(new \Datetime());
+  }
+
+
 
     /**
      * Set nom.
@@ -249,29 +364,7 @@ class Sujet
         return $this->utilisateur;
     }
 
-    /**
-     * Set classe.
-     *
-     * @param \NetUniversity\PlatformBundle\Entity\Classe $classe
-     *
-     * @return Sujet
-     */
-    public function setClasse(\NetUniversity\PlatformBundle\Entity\Classe $classe)
-    {
-        $this->Classe = $classe;
-
-        return $this;
-    }
-
-    /**
-     * Get classe.
-     *
-     * @return \NetUniversity\PlatformBundle\Entity\Classe
-     */
-    public function getClasse()
-    {
-        return $this->Classe;
-    }
+    
 
     /**
      * Set filiere.
@@ -367,5 +460,184 @@ class Sujet
     public function getUniversity()
     {
         return $this->university;
+    }
+
+    /**
+     * Set etat.
+     *
+     * @param string $etat
+     *
+     * @return Sujet
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat.
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->Commentaire = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set fichier.
+     *
+     * @param string|null $fichier
+     *
+     * @return Sujet
+     */
+    public function setFichier($fichier = null)
+    {
+        $this->Fichier = $fichier;
+
+        return $this;
+    }
+
+    /**
+     * Get fichier.
+     *
+     * @return string|null
+     */
+    public function getFichier()
+    {
+        return $this->Fichier;
+    }
+
+    /**
+     * Set recherche.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Recherche|null $recherche
+     *
+     * @return Sujet
+     */
+    public function setRecherche(\NetUniversity\PlatformBundle\Entity\Recherche $recherche = null)
+    {
+        $this->recherche = $recherche;
+
+        return $this;
+    }
+
+    /**
+     * Get recherche.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Recherche|null
+     */
+    public function getRecherche()
+    {
+        return $this->recherche;
+    }
+
+    /**
+     * Add commentaire.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaire
+     *
+     * @return Sujet
+     */
+    public function addCommentaire(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaire)
+    {
+        $this->Commentaire[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaire
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCommentaire(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaire)
+    {
+        return $this->Commentaire->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaire.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->Commentaire;
+    }
+
+    /**
+     * Set classe.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Classe|null $classe
+     *
+     * @return Sujet
+     */
+    public function setClasse(\NetUniversity\PlatformBundle\Entity\Classe $classe = null)
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Classe|null
+     */
+    public function getClasse()
+    {
+        return $this->classe;
+    }
+
+    /**
+     * Add like.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $like
+     *
+     * @return Sujet
+     */
+    public function addLike(\NetUniversity\PlatformBundle\Entity\Utilisateur $like)
+    {
+        $this->like[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $like
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLike(\NetUniversity\PlatformBundle\Entity\Utilisateur $like)
+    {
+        return $this->like->removeElement($like);
+    }
+
+    /**
+     * Get like.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLike()
+    {
+        return $this->like;
     }
 }

@@ -55,7 +55,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class UtilisateurController extends Controller
 {
 
-
 	public function CreerCoursAction(Request $request)
 	{
 		$Cours = New Cours();
@@ -73,30 +72,30 @@ class UtilisateurController extends Controller
 
 	    /////////////////////////////////////////////////////
 
-    // Si la requête est en POST
-    if ($request->isMethod('POST')) {
-      // On fait le lien Requête <-> Formulaire
-      // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
-      $form->handleRequest($request);
+	    // Si la requête est en POST
+	    if ($request->isMethod('POST')) {
+	      // On fait le lien Requête <-> Formulaire
+	      // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
+	      $form->handleRequest($request);
 
-      // On vérifie que les valeurs entrées sont correctes
-      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
-      if ($form->isSubmitted() && $form->isValid()) {
-        // On enregistre notre objet $advert dans la base de données, par exemple
-        $em = $this->getDoctrine()->getManager();
-       // $localisation = $em->getRepository('NetUniversityPlatformBundle:Localisation')->find($request->get('Location'););
-         //$utilisateur->addCategory($localisation);
-        $em->persist($Cours);
-        $em->flush();
+	      // On vérifie que les valeurs entrées sont correctes
+	      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
+	      if ($form->isSubmitted() && $form->isValid()) {
+	        // On enregistre notre objet $advert dans la base de données, par exemple
+	        $em = $this->getDoctrine()->getManager();
+	       // $localisation = $em->getRepository('NetUniversityPlatformBundle:Localisation')->find($request->get('Location'););
+	         //$utilisateur->addCategory($localisation);
+	        $em->persist($Cours);
+	        $em->flush();
 
-        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+	        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
-        // On redirige vers la page de visualisation de l'annonce nouvellement créée
-        return $this->redirectToRoute('CreatCours', array());
-      }
+	        // On redirige vers la page de visualisation de l'annonce nouvellement créée
+	        return $this->redirectToRoute('CreatCours', array());
+	      }
+		}
+		 return $this->render('NetUniversityPlatformBundle:Cours:Form.html.twig', array('form' => $form->createView(), 'UserId'=> $id));
 	}
-	 return $this->render('NetUniversityPlatformBundle:Cours:Form.html.twig', array('form' => $form->createView(), 'UserId'=> $id));
-}
 
 
 

@@ -1,34 +1,37 @@
-	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 	<div class="box-footer">
-	  {{ form_start(form, {'attr': {'class': 'w3-container'}}) }}
-    {{ form_errors(form) }}
+<div class="box box-info collapsed-box">
+            <div class="box-header">
+              <h3 class="box-title">CK Editor
+                <small>Advanced and full of features</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+              
+{% set x=random(5) %}
+                    <textarea id="editor1" name="{{ x }}" rows="10" cols="80">
+                    </textarea>
 
-	<!-- <form class="w3-container"> -->
-
-	<img class="img-responsive img-circle img-sm" src="{{ app.user.urlIMAGE}}" alt="Alt Text">
-	<!-- .img-push is used to add margin to elements next to floating images -->
-	 <div class="img-push">
-	    
-	 
-    <p>  
-      {{ form_widget(form.comment, {'attr': {'class': '', 'style': ''}}) }}
-      {{ form_errors(form.comment) }}
-    </p>
-    
-           
-  	{{ form_rest(form) }}
-
- 	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-  	{{ form_widget(form.save, {'attr': {'class': 'w3-btn'}}) }}
-
-
-	</div>
-  {# Fermeture de la balise <form> du formulaire HTML #}
-  {{ form_end(form) }}
-
-	 
-	    
-	   
+              	<button type="submit" name="search" id="search-btn" class="btn btn-flat". onclick="likeChangeFor(19{# Sujet.id #}, '{{ path('Commenter') }}', x)">Commenter    </button>
+<script>
+    x++;
+</script>
+            </div>
+          </div>
+          <!-- /.box -->
 	</div>
 	{% endif %}
 	</div>

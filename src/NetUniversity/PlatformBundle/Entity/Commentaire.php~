@@ -14,19 +14,20 @@ class Commentaire
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", inversedBy="commentaire")
    * @ORM\JoinColumn(nullable=true)
    */
     private $sujet;
+
     /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="commentaire")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $cours;
 
     /**
    * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $utilisateur;
 

@@ -21,18 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
-use NetUniversity\PlatformBundle\Form\UtilisateurType;
-use NetUniversity\PlatformBundle\Form\UniversityType;
-use NetUniversity\PlatformBundle\Form\DepartementType;
-use NetUniversity\PlatformBundle\Form\InstitutType;
-use NetUniversity\PlatformBundle\Form\FiliereType;
-use NetUniversity\PlatformBundle\Form\ModuleType;
-use NetUniversity\PlatformBundle\Form\RechercheType;
-use NetUniversity\PlatformBundle\Form\CoursType;
-use NetUniversity\PlatformBundle\Form\ExamenType;
-use NetUniversity\PlatformBundle\Form\TPType;
-use NetUniversity\PlatformBundle\Form\TDType;
-
 use NetUniversity\PlatformBundle\Repository\UniversityRepository;
 use NetUniversity\PlatformBundle\Repository\ContactsRepository;
 use NetUniversity\PlatformBundle\Repository\UtilisateurRepository;

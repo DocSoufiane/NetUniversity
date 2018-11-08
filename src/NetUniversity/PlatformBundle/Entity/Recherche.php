@@ -32,10 +32,16 @@ class Recherche
   
       /**
     * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="recherche")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
     */
     private $cours;
 
+      /**
+    * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", inversedBy="recherche")
+   * @ORM\JoinColumn(nullable=true)
+
+    */
+    private $sujet;
 
     /**
      * Constructor
@@ -113,5 +119,29 @@ class Recherche
     public function getCours()
     {
         return $this->cours;
+    }
+
+    /**
+     * Set sujet.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Sujet $sujet
+     *
+     * @return Recherche
+     */
+    public function setSujet(\NetUniversity\PlatformBundle\Entity\Sujet $sujet)
+    {
+        $this->Sujet = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * Get sujet.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Sujet
+     */
+    public function getSujet()
+    {
+        return $this->Sujet;
     }
 }

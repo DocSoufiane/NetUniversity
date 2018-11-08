@@ -1,6 +1,9 @@
 {% extends "NetUniversityPlatformBundle::layout.html.twig" %}   
 {% block contenu %}    
-        
+  <script>
+    
+  var x=0;
+</script>      
 
     <!-- Main content -->
     <section class="content">
@@ -8,30 +11,30 @@
       <div class="row">
         <div class="col-md-3">
 
-          <!-- Profile Image -->
+          <!-- Sujet.Utilisateurile Image -->
           <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ Prof.urlIMAGE }}" alt="User profile picture">
+            <div class="box-body box-Sujet.Utilisateurile">
+              <img class="Sujet.Utilisateurile-user-img img-responsive img-circle" src="{{ Sujet.Utilisateur.urlIMAGE }}" alt="User picture">
 
-              <h3 class="profile-username text-center">{{ Prof.Prenom }} {{ Prof.Nom }}</h3>
+              <h3 class="Sujet.Utilisateurile-username text-center">{{ Sujet.Utilisateur.Prenom }} {{ Sujet.Utilisateur.Nom }}</h3>
 
               <p class="text-muted text-center">
               
-              {% if Prof.roles[0] == "ROLE_ETUDIANT" %}  
+              {% if Sujet.Utilisateur.roles[0] == "ROLE_ETUDIANT" %}  
 
-               {% elseif Prof.roles[0] == "ROLE_PROF" %}
-               PROF
-               {% elseif Prof.roles[0] == "ROLE_CHEF_FILIERE" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_Sujet.Utilisateur" %}
+               Sujet.Utilisateur
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_CHEF_FILIERE" %}
                CHEFE FILIERE
-               {% elseif Prof.roles[0] == "ROLE_CHEF_DEPPARTEMENT" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_CHEF_DEPPARTEMENT" %}
                CHEFE DEPPARTEMENT
-               {% elseif Prof.roles[0] == "ROLE_DIRECTEUR" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_DIRECTEUR" %}
                DIRECTEUR
-               {% elseif Prof.roles[0] == "ROLE_DOYEN" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_DOYEN" %}
                DOYEN
-               {% elseif Prof.roles[0] == "ROLE_ADMIN" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_ADMIN" %}
                ADMIN
-               {% elseif Prof.roles[0] == "ROLE_SUPER_ADMIN" %}
+               {% elseif Sujet.Utilisateur.roles[0] == "ROLE_SUPER_ADMIN" %}
                SUPER ADMIN
 
                {% endif %}
@@ -58,7 +61,7 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">À propos du Cours</h3>
+              <h3 class="box-title">À propos du Sujet</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -72,7 +75,7 @@
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-              <p class="text-muted">{% if Prof.localisation %}{{ Prof.localisation.Nom }} {% endif %}</p>
+              <p class="text-muted">{% if Sujet.Utilisateur.localisation %}{{ Sujet.Utilisateur.localisation.Nom }} {% endif %}</p>
 
               <hr>
 
@@ -112,12 +115,12 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Cours</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Sujet</a></li>
               <li><a href="#timeline" data-toggle="tab">Autres support de la classe</a></li>
               <li><a href="#settings" data-toggle="tab">Autres Support du Module</a></li>
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-              {% if app.user.id == Cours.utilisateur.id %}
-              <a href="{{ path('RemoveCours', {'CoursId':Cours.id}) }}" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+              {% if app.user.id == Sujet.utilisateur.id %}
+              <a href="{{ path('RemoveSujet', {'SujetId':Sujet.id}) }}" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
               {% endif %}
               {% endif %}
             </ul>
@@ -139,7 +142,7 @@
                           {# titre #}
                         </div>
                         <!-- /.box-header -->
-                        {% if Cours.type == "text" %}
+                
                         <div class="box-body">
                           <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
@@ -147,29 +150,26 @@
                               <div class="box-header with-border">
                                 <h4 class="box-title">
                                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    <h3 class="box-title">{{ Cours.Nom}}</h3>
+                                    <h3 class="box-title">{{ Sujet.Nom}}</h3>
                                   </a>
                                 </h4>
                               </div>
                               <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="box-body">
-                                  {{ Cours.Cours|raw }}
+                                  {{ Sujet.detail|raw }}
                                 </div>
                               </div>
                             </div>
                             </div>
                         </div>
                         <!-- /.box-body -->
-                     {% endif %}
-                     {% if Cours.type == "Fichier"%}
-                          {% if Cours.Fichier %}
-                            <iframe height="900px" width="100%"  src="{{ Cours.Fichier }}" ></iframe>
+
+                          {% if Sujet.Fichier %}
+                            <iframe height="900px" width="100%"  src="{{ Sujet.Fichier }}" ></iframe>
                           {% endif %}
-                          
-                     {% endif %}
                       <!-- /.box --> 
                       </div>
-                   {% if Cours.Fichier %}
+                   {% if Sujet.Fichier %}
                    
                     <!-- /.col -->
                     <div class="box-footer">
@@ -178,10 +178,10 @@
                         <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
 
                         <div class="mailbox-attachment-info">
-                          <a href="{{ Cours.Fichier }}" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{ Cours.Nom }}</a>
+                          <a href="{{ Sujet.Fichier }}" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{ Sujet.Nom }}</a>
                               <span class="mailbox-attachment-size">
                                 1,245 KB
-                                <a href="{{ Cours.Fichier }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                <a href="{{ Sujet.Fichier }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                               </span>
                         </div>
                       </li>
@@ -193,23 +193,23 @@
                     <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
                     <label>
 
-                    <input type="checkbox" id="likeCours_{{ Cours.id }}" class="js-switch" {{ like == 1 ? 'checked' : '' }} onclick="likeChangeForCours({{ Cours.id }}, '{{ path('like_Cours', {id: Cours.id}) }}')"/>
+                    <input type="checkbox" id="likeSujet_{{ Sujet.id }}" class="js-switch" {{ like == 1 ? 'checked' : '' }}  onclick="likeChangeForSujet({{ Sujet.id }}, '{{ path('like_Sujet', {id: Sujet.id}) }}')"/>
 
                     </label>
 
-                    <li><a href="#"  id="likeCours_{{ Cours.id }}" onclick="likeChangeForCours({{ Cours.id }}, '{{ path('like_Cours', {id: Cours.id}) }}')"
-                    class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> <span class="pull-right badge bg-green">{{ Cours.like.Count }}</span></a>
+                    <li><a href="#"  id="likeSujet_{{ Sujet.id }}" onclick="likeChangeForSujet({{ Sujet.id }}, '{{ path('like_Sujet', {id: Sujet.id}) }}')"
+                    class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> <span class="pull-right badge bg-green">{{ Sujet.like.Count }} </span></a>
                     </li>
                     <li class="pull-right">
                       <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
                         (5)</a></li>
                   </ul>
-                  <div class="box-footer box-comments">
+                  <div style="background: #eeeeee61;" class="box-footer box-comments">
 
-                {{ render(controller("NetUniversityPlatformBundle:Commentaire:liste", {'CoursId': Cours.id})) }}
-                {# {% if  %} #}
-                {{ render(controller("NetUniversityPlatformBundle:Commentaire:add", { 'CoursId' : Cours.id } )) }}
-                {# {% endif %} #}
+                {{ render(controller("NetUniversityPlatformBundle:Sujet:listeComment", { 'SujetId': Sujet.id })) }}
+                
+                {{ render(controller("NetUniversityPlatformBundle:Sujet:addComment", { 'SujetId' : Sujet.id } )) }}
+               
                 <!-- /.post -->
               </div>
               <!-- /.tab-pane -->
@@ -226,9 +226,9 @@
 
     </section>
     <script>
-        function likeChangeForCours(id, pathUrl){
+        function likeChangeForSujet(id, pathUrl){
 
-          vals = $("#likeCours_"+id).is(':checked');
+          vals = $("#likeSujet_"+id).is(':checked');
           $.ajax({
 
             url:pathUrl,
@@ -236,7 +236,7 @@
             dataType: "json",
 
             data: {
-            "Cours-id" : id,
+            "Sujet-id" : id,
             "checkbox-value" :vals,
             },
 
@@ -247,6 +247,28 @@
 
           });
         }
+
+    function likeChangeFor(id, pathUrl,x){
+  var vals = document.getElementById(x).value;
+      
+      $.ajax({
+
+        url:pathUrl,
+        type: "POST",
+        dataType: "json",
+
+        data: {
+        "Sujet-id" : id,
+        "checkbox-value" :vals,
+        },
+
+        async: true,
+        success: function (data)
+        {
+        }
+
+      });
+    }
 
     </script>
     <!-- /.content -->

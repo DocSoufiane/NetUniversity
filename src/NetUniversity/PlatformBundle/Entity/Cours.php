@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 
+
 /**
  * Cours
  *
@@ -228,29 +229,6 @@ class Cours
         return $this->DateDeCreation;
     }
 
-    /**
-     * Set fichier.
-     *
-     * @param string $fichier
-     *
-     * @return Cours
-     */
-    public function setFichier($fichier)
-    {
-        $this->Fichier = $fichier;
-
-        return $this;
-    }
-
-    /**
-     * Get fichier.
-     *
-     * @return string
-     */
-    public function getFichier()
-    {
-        return $this->Fichier;
-    }
 
     /**
      * Set type.
@@ -577,4 +555,34 @@ class Cours
     {
         return $this->recherche;
     }
+
+    /**
+     * Set Fichier.
+     *
+     * @param string $urlFile
+     *
+     * @return Support
+     */
+    public function setFichier($Fichier)
+    {
+        $this->Fichier = $Fichier;
+
+        return $this;
+    }
+
+    /**
+     * Get urlFile.
+     *
+     * @return string
+     */
+    public function getFichier()
+    {
+        return $this->Fichier;
+    }
+
+
+
+
+
+
 }

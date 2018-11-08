@@ -127,6 +127,10 @@ addClasse:
     path: /Classe/Add
     defaults: { _controller: NetUniversityPlatformBundle:Classe:Add} 
 
+addSujet:
+    path: /Sujet/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:AddSujet} 
+
 ListeUniversity:
     path: /Universities
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:listeUniversity}
@@ -162,6 +166,7 @@ ListeCoursEdition:
 ListeThemes:
     path: /Forum
     defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
+
 
 ViewUniversity:
     path: /University/{UniversityId}
@@ -211,6 +216,7 @@ ViewClasse:
       _controller: NetUniversityPlatformBundle:Classe:view
     requirements:
       id: \d+
+
 ForumSubject:
     path: /Forum/Subject/{Id}
     defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewSubject}
@@ -243,6 +249,13 @@ RemoveCours:
     path: /Remove/Cours/{CoursId}
     defaults: 
       _controller: NetUniversityPlatformBundle:Support:RemoveSupport
+    requirements:
+      id: \d+
+
+RemoveSujet:
+    path: /Remove/Sujet/{SujetId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Forum:RemoveSujet
     requirements:
       id: \d+
 
@@ -283,6 +296,10 @@ fos_user_change_password:
 like_Cours:
     path: /user/enable/{id}
     defaults: { _controller: NetUniversityPlatformBundle:Utilisateur:likeCours}
+
+like_Sujet:
+    path: /user/like/Sujet/{id}
+    defaults: { _controller: NetUniversityPlatformBundle:Forum:likeSujet}
 
 Recherche:
     path: /Recherche
@@ -338,6 +355,11 @@ Notif:
 ADMIN:
     path: /ADMIN
     defaults: { _controller: NetUniversityPlatformBundle:Gestion:index}  
+
+Commenter:
+    path: /Commenter
+    defaults: { _controller: NetUniversityPlatformBundle:Sujet:addCommentAJAX}  
+
 
 checkMailAddresse:
     path: /checkMailAddresse
