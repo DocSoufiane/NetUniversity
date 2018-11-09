@@ -413,7 +413,47 @@
           </ul>
 
         </li>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li class="treeview">
+            <a href="#">
+           <i class="fa fa-fw fa-university"></i>
+            <span>Ma Université</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
 
+          <ul class="treeview-menu">
+
+            {% if app.user.University != null %}
+            <li><a href="{{path('ViewUniversity', {'UniversityId': app.user.University.id })}}"><i class="fa fa-circle-o"></i> Universités</a></li>
+            {% endif %}
+
+            {% if app.user.Institut != null %}
+            <li><a href="{{path('ViewInstitut', {'InstitutId': app.user.Institut.id })}}"><i class="fa fa-circle-o"></i> Instituts</a></li>
+             {% endif %}
+            
+            {% if app.user.Deppartement != null %}           
+            <li><a href="{{path('ViewDepartement', {'DepartementId': app.user.Deppartement.id })}}"><i class="fa fa-circle-o"></i> Departements</a></li>
+            {% endif %}
+            
+            {% if app.user.Filiere != null %}            
+            <li><a href="{{path('ViewFiliere', {'FiliereId': app.user.Filiere.id })}}"><i class="fa fa-circle-o"></i> Filiere</a></li>
+             {% endif %}
+            
+            {% if app.user.Classe != null %}           
+            <li><a href="{{path('ViewClasse', {'ClasseId': app.user.Classe.id })}}"><i class="fa fa-circle-o"></i> Classe</a></li>
+          
+            <li><a href="#"><i class="fa fa-circle-o"></i> Furom de Classe </a></li>
+            {% endif %}
+                      
+          </ul>
+
+        </li>
+        {% endif %}
+
+        </li>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <li class="treeview">
             <a href="#">
            <i class="fa fa-fw fa-joomla"></i>
@@ -425,11 +465,13 @@
 
           <ul class="treeview-menu">
             <li><a href="{{path('ForumIndex')}}"><i class="fa fa-circle-o"></i> Forum de ma classe</a></li>
-            <li><a href="{{path('ForumClasse', {'Id': 5})}}"><i class="fa fa-circle-o"></i> Classe5</a></li>
+            {% if app.user.Classe != null %}  
+            <li><a href="{{path('ForumClasse', {'Id': app.user.Classe.id })}}"><i class="fa fa-circle-o"></i> Furom de Classe</a></li>
+            {% endif %}
           </ul>
 
         </li>
-
+{% endif %}
 
         <li class="treeview">
           <a href="#">

@@ -4,16 +4,21 @@
     <section class="content">
       <!-- Info boxes -->
       <div class="row">
-      {#
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
       {% if app.user != Classe.owner %}
-        {% if app.user in Classe.Etudiant is null %}
-          <button type="button" class="btn btn-default btn-block btn-sm btn-success">Joindre</button><br>
+        {% if app.user in Classe.Etudiant  %}
+          <button type="button" class="btn btn-default btn-block btn-sm btn-danger" 
+          onclick="JoinClasse( {{ Classe.id }}, {{ app.user.id }}, 'leave', '{{ path('JoinClasse') }}')"
+          >Quiter</button><br>
         
         {% else %}
-          <button type="button" class="btn btn-default btn-block btn-sm btn-danger">Quiter</button><br>
 
+          <button type="button" class="btn btn-default btn-block btn-sm btn-success"
+          onclick="JoinClasse( {{ Classe.id }}, {{ app.user.id }}, 'join', '{{ path('JoinClasse') }}')"
+          >Joindre</button><br>
         {% endif %}
-      {% endif %} #}
+      {% endif %} 
+    {% endif %} 
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-gavel"></i></span>
@@ -511,5 +516,31 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+
+    <script>
+        function JoinClasse(ClasseId, UserId, Action, pathUrl){
+
+          $.ajax({
+
+            url:pathUrl,
+            type: "POST",
+            dataType: "json",
+
+            data: {
+            "ClasseId" : ClasseId,
+            "UserId" :UserId,
+            "Action" :Action,
+            },
+
+            async: true,
+            success: function (data)
+            {
+              
+            }
+
+          });
+        }
+
+    </script>
 
 {% endblock %}

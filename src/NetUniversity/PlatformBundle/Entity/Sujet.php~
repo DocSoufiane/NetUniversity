@@ -25,7 +25,7 @@ class Sujet
     private $utilisateur;
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, inversedBy="sujet")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Classe", cascade={"persist"}, cascade={"remove"}, inversedBy="sujet")
    * @ORM\JoinColumn(nullable=true)
    */
     private $classe;
@@ -76,7 +76,12 @@ class Sujet
     */
     private $like;
 
-    
+   /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", cascade={"remove"}, mappedBy="sujet")
+   * @ORM\JoinColumn(nullable=false)
+   */
+      private $commentaire;
+
     /**
      * @var int
      *

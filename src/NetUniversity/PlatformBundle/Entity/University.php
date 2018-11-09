@@ -72,6 +72,14 @@ class University
     private $genre; // reel/ virtuel
 
     /**
+     * @var string
+     *
+     * @Assert\Choice(choices={"public", "prive"}, message="Choose a valid genre. (public | prive)")
+     * @ORM\Column(name="privilege", type="string", length=255)
+     */
+    private $privilege; // public/ prive
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="datetime")

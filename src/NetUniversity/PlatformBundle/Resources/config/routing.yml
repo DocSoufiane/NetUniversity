@@ -168,6 +168,10 @@ ListeThemes:
     defaults: { _controller: NetUniversityPlatformBundle:Forum:index}
 
 
+ListeCommentairesSujet:
+    path: /ListeCommentairesSujet/{SujetId}
+    defaults: { _controller: NetUniversityPlatformBundle:Sujet:listeComment}
+
 ViewUniversity:
     path: /University/{UniversityId}
     defaults: 
@@ -364,4 +368,9 @@ Commenter:
 checkMailAddresse:
     path: /checkMailAddresse
     defaults: { _controller: NetUniversityPlatformBundle:Institut:checkMailAddresse} 
+
+JoinClasse:
+    path: /JoinClasse
+    defaults: { _controller: NetUniversityPlatformBundle:Classe:JoinClasse} 
+
     

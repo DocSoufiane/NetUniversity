@@ -116,7 +116,31 @@ class ForumController extends Controller
 
 	public function RemoveSujetAction($SujetId){
 
+		if (!isset($SujetId)) {
+      		throw new NotFoundHttpException("Le Sujet n'existe pas.");
+    		}
+    	else{
 
+			$em = $this->getDoctrine()->getManager();
+
+
+			// On récupère l'annonce $id
+			$Sujet = $em->getRepository('NetUniversityPlatformBundle:Sujet')->find($SujetId);
+
+			if (null === $Sujet) {
+			  throw new NotFoundHttpException("La Sujet d'id ".$SujetId." n'existe pas.");
+			}
+
+			if ($this->getUser() == $Sujet->getutilisateur()) {
+			      	$em->remove($Sujet);
+			      	//$em->persist($user);
+			      	$em->flush();
+ 			return $this->redirectToRoute('utilisateurview', array('UserId' => $Sujet->getutilisateur()->getId()));
+
+			}
+
+ 			return $this->redirectToRoute('ForumSujet', array('SujetId' => $Sujet->getId()));
+		}
 
 
 	}

@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\File\File;
 use FOS\UserBundle\Model\User as BaseUser;
 use NetUniversity\UserBundle;
 
+
+
+
 /**
  * User
  *
@@ -296,23 +299,6 @@ class Utilisateur extends BaseUser
         return $this->dernierevisite;
     }
 
-
-    /**
-     * Get Contacts.
-     *
-     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
-     */
-    public function getContacts()
-    {
-       
- /*       $Contacts = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('NetUniversityPlatformBundle:Contacts')
-            ->findByUser($this)
-          ;
-        return $Contacts; */
-    }
 
 
   // Notez le singulier, on ajoute une seule catégorie à la fois

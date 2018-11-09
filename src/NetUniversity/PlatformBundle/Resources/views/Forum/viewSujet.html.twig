@@ -52,7 +52,9 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <a href="javascript:void(0)" class="btn btn-primary btn-block" onclick="document.getElementById('id11').style.display='block'">
+              <b>Envoyer le sujet a des amis(es)</b>
+              </a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -208,7 +210,7 @@
 
                 {{ render(controller("NetUniversityPlatformBundle:Sujet:listeComment", { 'SujetId': Sujet.id })) }}
                 
-                {{ render(controller("NetUniversityPlatformBundle:Sujet:addComment", { 'SujetId' : Sujet.id } )) }}
+                {{ render(controller("NetUniversityPlatformBundle:Sujet:addComment", { 'SujetId' : Sujet.id, 'commentMere': 0 } )) }}
                
                 <!-- /.post -->
               </div>
@@ -225,6 +227,46 @@
       <!-- /.row -->
 
     </section>
+
+<div id="id11" style="       z-index: 4;    margin-left: 37%;    position: fixed;    bottom: 7%;    right: 14%;    display: none;"     class="col-md-6">
+              <!-- USERS LIST -->
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Latest Members</h3>
+
+                  <div class="box-tools pull-right">
+                    <span class="label label-danger">8 New Members</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <ul class="users-list clearfix">
+                  {#
+                  {% for Contact in Sujet.Utilisateur.Contacts%}
+                    <li>
+                      <img src="{{ Contact.urlIMAGE }}" alt="User Image">
+                      <a class="users-list-name" href="#">{{ Contact.Nom }} {{ Contact.prenom }}</a>
+                      <span class="users-list-date">Today</span>
+                      <input style="margin-bottom:5px;" type="checkbox" name="4" value="{{ Contact.id }}"/>
+                    </li>
+                  {% endfor %}
+                  #}
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                  <a href="javascript:void(0)" class="uppercase">View All Users</a>
+                </div>
+                <!-- /.box-footer -->
+              </div>
+              <!--/.box -->
+            </div>
+
     <script>
         function likeChangeForSujet(id, pathUrl){
 
@@ -250,6 +292,8 @@
 
     function likeChangeFor(id, pathUrl,x){
   var vals = document.getElementById(x).value;
+
+
       
       $.ajax({
 
@@ -258,6 +302,7 @@
         dataType: "json",
 
         data: {
+        "CommentMere": x,
         "Sujet-id" : id,
         "checkbox-value" :vals,
         },
@@ -265,9 +310,13 @@
         async: true,
         success: function (data)
         {
-        }
+        }        
 
       });
+    
+      document.getElementById(x).innerHTML = document.getElementById('com'+x).value;
+      document.getElementById('com'+x).innerHTML = "";
+          
     }
 
     </script>

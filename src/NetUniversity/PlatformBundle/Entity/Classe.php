@@ -30,7 +30,7 @@ class Classe
     private $nom;
 
     /**
-   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", mappedBy="classe")
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", cascade={"remove"}, mappedBy="classe")
    * @ORM\JoinColumn(nullable=false)
    */
       private $sujet;
@@ -48,7 +48,7 @@ class Classe
     private $dateDeCreation;
 
     /**
-   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"persist"})
+   * @ORM\OneToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Utilisateur", cascade={"remove"}, cascade={"persist"})
    * @ORM\JoinColumn(nullable=false)
    */
       private $owner;

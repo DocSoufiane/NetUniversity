@@ -285,6 +285,7 @@ public function AddCoursAction(Request $request)
 		    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 		    	$date = new \DateTime();
       			$Cours->setDateDeCreation($date);
+      			$Cours->setderniereModif($date);
       			$repository = $this->getDoctrine()
 			      ->getManager()
 			      ->getRepository('NetUniversityPlatformBundle:Module');

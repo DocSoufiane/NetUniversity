@@ -227,6 +227,76 @@ public function AddFiliereAction(Request $request)
 
 	}
 
+	public function JoinClasseAction(Request $request)
+	{
+
+		if(!$this->getuser()){
+				echo "<a href=\"/login\" class=\"btn btn-default btn-flat\">Se connecter pour acceder</a>";
+		}
+		
+
+			      $userManager = $this->get('fos_user.user_manager');
+
+	
+			$ClasseId = $request->get('ClasseId');
+			$UserId= $request->get('UserId');
+			$Action= $request->get('Action');
+
+		    $em = $this->getDoctrine()->getManager();
+	  		$User = $em->getRepository('NetUniversityPlatformBundle:Utilisateur')->find($UserId);
+	  		$Classe = $em->getRepository('NetUniversityPlatformBundle:Classe')->find($ClasseId);
+			    
+			$User->setClasse($Classe);
+		if($Action=='join'){
+			if($Classe->getFiliere()){
+
+				$User->setClasse($Classe);
+
+			}
+
+			if($Classe->getFiliere()->getDepartement()){
+
+				$User->setDeppartement($Classe->getFiliere()->getDepartement());
+
+			}
+
+			if($Classe->getFiliere()->getDepartement()->getInstitut()){
+
+				$User->setInstitut($Classe->getFiliere()->getDepartement()->getInstitut());
+
+			}
+
+			if($Classe->getFiliere()->getDepartement()->getInstitut()->getUniversity()){
+
+				$User->setUniversity($Classe->getFiliere()->getDepartement()->getInstitut()->getUniversity());
+
+			}
+
+	     	$em = $this->getDoctrine()->getManager();
+	      						      $userManager->updateUser($User);
+	      	$em->flush();
+
+
+	     
+			$request->getSession()->getFlashBag()->add('notice', 'Vous ètes bien créée ajouter.');
+
+		return new Response('Vous ètes bien créée ajouter.');
+		}
+		elseif($Action=='leave'){
+
+	     	$em = $this->getDoctrine()->getManager();
+				$User->setClasse(null);
+	      	$em->flush();
+		return new Response('Vous ètes retirés.');
+		}
+		else{
+			return "error";
+		}
+
+
+	}
+
+
 }
 
 ?>

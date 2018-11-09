@@ -14,13 +14,13 @@ class Commentaire
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", inversedBy="commentaire")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", cascade={"remove"}, inversedBy="commentaire")
    * @ORM\JoinColumn(nullable=true)
    */
     private $sujet;
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", inversedBy="commentaire")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Cours", cascade={"remove"}, inversedBy="commentaire")
    * @ORM\JoinColumn(nullable=true)
    */
     private $cours;
@@ -32,10 +32,16 @@ class Commentaire
     private $utilisateur;
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", cascade={"remove"}, inversedBy="CommentaireFils")
    * @ORM\JoinColumn(nullable=true)
    */
     private $CommentaireMere;
+
+        /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", cascade={"remove"}, mappedBy="CommentaireMere")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $CommentaireFils;
 
     /**
      * @var int
@@ -213,5 +219,48 @@ class Commentaire
     public function getCommentaireMere()
     {
         return $this->CommentaireMere;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->CommentaireFils = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add commentaireFil.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaireFil
+     *
+     * @return Commentaire
+     */
+    public function addCommentaireFil(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaireFil)
+    {
+        $this->CommentaireFils[] = $commentaireFil;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaireFil.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Commentaire $commentaireFil
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCommentaireFil(\NetUniversity\PlatformBundle\Entity\Commentaire $commentaireFil)
+    {
+        return $this->CommentaireFils->removeElement($commentaireFil);
+    }
+
+    /**
+     * Get commentaireFils.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaireFils()
+    {
+        return $this->CommentaireFils;
     }
 }

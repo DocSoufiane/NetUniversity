@@ -36,16 +36,21 @@ class SujetController extends Controller
 {
 
 
-	public function addCommentAction(Request $request, $SujetId)
+	public function addCommentAction(Request $request, $SujetId, $commentMere)
 	{	
 		if(!$this->getuser()){
 				echo "<a href=\"/login\" class=\"btn btn-default btn-flat\">Se connecter pour commenter</a>";
 		}
-		
-	    $em = $this->getDoctrine()->getManager();
+
+			    $em = $this->getDoctrine()->getManager();
   		$Sujet = $em->getRepository('NetUniversityPlatformBundle:Sujet')->find($SujetId);
-	
-	 return $this->render('NetUniversityPlatformBundle:Commentaire:add.html.twig', array('Sujet' => $Sujet));
+		if($commentMere){
+
+	 	return $this->render('NetUniversityPlatformBundle:Forum:addComment.html.twig', array('Sujet' => $Sujet, 'commentMere'=> $commentMere));
+		}
+		else{
+				 	return $this->render('NetUniversityPlatformBundle:Forum:addComment.html.twig', array('Sujet' => $Sujet, 'commentMere'=> 0));
+		}
 	}
 
 	public function addCommentAJAXAction(Request $request)
@@ -62,12 +67,18 @@ class SujetController extends Controller
 
 			$id = $request->get('Sujet-id');
 			$isChecked = $request->get('checkbox-value');
+			$CommentMere= $request->get('CommentMere');
 
 		    $Commentaire = New Commentaire();
 		    $em = $this->getDoctrine()->getManager();
 	  		$Sujet = $em->getRepository('NetUniversityPlatformBundle:Sujet')->find($id);
 
+	  		if($CommentMere != 0){
 
+	  			$CommentMereOB = $em->getRepository('NetUniversityPlatformBundle:Commentaire')->find($CommentMere);
+
+	  			$Commentaire->setCommentaireMere($CommentMereOB);
+	  		}
 	    	$date = new \DateTime();
   			$Commentaire->setdateDuComment($date);
 			    
@@ -78,12 +89,13 @@ class SujetController extends Controller
 	     	$em = $this->getDoctrine()->getManager();
 	      	$em->persist($Commentaire);
 	      	$em->flush();
-	      	dump($Commentaire); die;
 
+
+	     
 			$request->getSession()->getFlashBag()->add('notice', 'Commentaire bien créée.');
 
-			return $this->redirectToRoute('ForumSujet', array('SujetId' => $SujetId)); 
-		
+			$OUT = $this->redirectToRoute('ListeCommentairesSujet', array('SujetId' => $Sujet->getId())); 
+		return new Response($OUT);
 		}
 
 	}
@@ -99,7 +111,7 @@ public function listeCommentAction($SujetId)
 	//	dump($com->getComment());
    // }
 //die;
-return $this->render('NetUniversityPlatformBundle:Commentaire:liste.html.twig', array('listeCommentaire' => $listeCommentaire, 'CoursId'=> $SujetId));  
+return $this->render('NetUniversityPlatformBundle:Forum:listeComment.html.twig', array('listeCommentaire' => $listeCommentaire, 'SujetId'=> $SujetId));  
 
 	}
 

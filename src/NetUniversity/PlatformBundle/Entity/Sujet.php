@@ -77,7 +77,7 @@ class Sujet
     private $like;
 
    /**
-   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", mappedBy="sujet")
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", cascade={"remove"}, mappedBy="sujet")
    * @ORM\JoinColumn(nullable=false)
    */
       private $commentaire;

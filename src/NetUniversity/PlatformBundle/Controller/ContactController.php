@@ -64,8 +64,7 @@ class ContactController extends Controller
 
 		      return $this->redirectToRoute('ViewCours', array('CoursId' => $Cours->getid()));  
 
-		// //////////////////////////////////////////////////////////////////
-	}
+			}
 
 	    return $this->render('NetUniversityPlatformBundle:Cours:add.html.twig', array('form' => $form->createView(),));
 
