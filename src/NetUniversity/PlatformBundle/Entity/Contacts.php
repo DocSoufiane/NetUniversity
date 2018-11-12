@@ -4,6 +4,8 @@ namespace NetUniversity\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * Contacts
  *
@@ -204,5 +206,4 @@ class Contacts
     }
 
     
-
 }

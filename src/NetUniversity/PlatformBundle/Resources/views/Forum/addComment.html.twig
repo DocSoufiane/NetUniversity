@@ -1,39 +1,39 @@
 
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-	<div style="        background: #ecf0f53b;" class="box-footer">
-<div class="box box-info collapsed-box">
-            <div class="box-header">
-              
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button style="height: 1%;" type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                  </button>
+<div style="        background: #ecf0f53b;" class="box-footer">
+    <div class="box box-info collapsed-box">
+        <div class="box-header">
+          
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button style="height: 1%;" type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+              </button>
 
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-                          
-              {% if commentMere is defined %}
-              {% set x=commentMere %}
-              {% else %}
-              {% set x=0 %}
-              {% endif %}
-              <p id="p{{ x }}">
-                  
-              </p>
-            <div class="box-body pad">
-
-
-                    <textarea id="{{ x }}" name="editor1" rows="10" cols="80">
-                    </textarea>
-
-              	<button type="submit" name="search" id="search-btn" class="btn btn-flat". onclick="likeChangeFor(19{# Sujet.id #}, '{{ path('Commenter') }}', {{ x }})">Commenter    </button>
-
-            </div>
           </div>
-          <!-- /.box -->
+          <!-- /. tools -->
+        </div>
+        <!-- /.box-header -->
+                      
+          {% if commentMere is defined %}
+          {% set x=commentMere %}
+          {% else %}
+          {% set x=0 %}
+          {% endif %}
+          <p id="p{{ x }}">
+              
+          </p>
+        <div class="box-body pad">
+
+
+                <textarea id="{{ x }}" name="" rows="10" cols="80">
+                </textarea>
+
+          	<button type="submit" name="search" id="search-btn" class="btn btn-flat". onclick="likeChangeFor({{ Sujet.id }}, '{{ path('Commenter') }}', {{ x }})">Commenter    </button>
+
+        </div>
+      </div>
+      <!-- /.box -->
 	</div>
 	{% endif %}

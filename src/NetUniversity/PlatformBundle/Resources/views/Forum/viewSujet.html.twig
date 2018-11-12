@@ -118,8 +118,6 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Sujet</a></li>
-              <li><a href="#timeline" data-toggle="tab">Autres support de la classe</a></li>
-              <li><a href="#settings" data-toggle="tab">Autres Support du Module</a></li>
               {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
               {% if app.user.id == Sujet.utilisateur.id %}
               <a href="{{ path('RemoveSujet', {'SujetId':Sujet.id}) }}" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -127,15 +125,7 @@
               {% endif %}
             </ul>
             <div class="tab-content">
-            <div class="tab-pane" id="timeline">
-                <!-- The timeline -->
-                supportde mm classe1 ... 2
-                </div>
-              <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="settings">
-                SUpport de mm Module2 ... 3
-              </div>
               <!-- /.tab-pane -->
               <div class="tab-pane active" id="activity">
                 
@@ -204,9 +194,9 @@
                     </li>
                     <li class="pull-right">
                       <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
+                        ({{ Sujet.commentaire.Count }})</a></li>
                   </ul>
-                  <div style="background: #eeeeee61;" class="box-footer box-comments">
+                  <div id="Comm" style="background: #eeeeee61;" class="box-footer box-comments">
 
                 {{ render(controller("NetUniversityPlatformBundle:Sujet:listeComment", { 'SujetId': Sujet.id })) }}
                 
@@ -246,7 +236,7 @@
                 <div class="box-body no-padding">
                   <ul class="users-list clearfix">
                   {#
-                  {% for Contact in Sujet.Utilisateur.Contacts%}
+                  {% for Contact in Sujet.Utilisateur.Contact%}
                     <li>
                       <img src="{{ Contact.urlIMAGE }}" alt="User Image">
                       <a class="users-list-name" href="#">{{ Contact.Nom }} {{ Contact.prenom }}</a>
@@ -314,9 +304,40 @@
 
       });
     
-      document.getElementById(x).innerHTML = document.getElementById('com'+x).value;
-      document.getElementById('com'+x).innerHTML = "";
-          
+     // document.getElementById(x).innerHTML = document.getElementById('com'+x).value;
+      //document.getElementById('com'+x).innerHTML = "";
+
+    /*  $(window.location.href, function(html){
+      var html = $(html);
+      $('#Comm').html(html.find('#Comm').html())
+      });  
+      */
+      window.location.reload();
+    }
+
+
+    function Supprimercommentaire(id, pathUrl){
+
+      $.ajax({
+
+        url:pathUrl,
+        type: "POST",
+        dataType: "json",
+
+        data: {
+        "Commentaire-id" : id,
+        },
+
+        async: true,
+        success: function (data)
+        {
+        }        
+
+      });
+
+    var element = document.getElementById('Comment'+id);
+    element.parentNode.removeChild(element);
+
     }
 
     </script>

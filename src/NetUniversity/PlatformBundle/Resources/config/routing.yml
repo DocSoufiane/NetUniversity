@@ -263,6 +263,13 @@ RemoveSujet:
     requirements:
       id: \d+
 
+RemoveCommentaire:
+    path: /Remove/Commentaire
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Forum:RemoveCommentaire
+    requirements:
+      id: \d+
+
 indexMail:
     path: /Mail
     defaults: { _controller: NetUniversityPlatformBundle:Mail:index}

@@ -14,7 +14,7 @@ class Commentaire
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", cascade={"remove"}, inversedBy="commentaire")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", inversedBy="commentaire")
    * @ORM\JoinColumn(nullable=true)
    */
     private $sujet;
@@ -38,7 +38,7 @@ class Commentaire
     private $CommentaireMere;
 
         /**
-   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", cascade={"remove"}, mappedBy="CommentaireMere")
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Commentaire", mappedBy="CommentaireMere")
    * @ORM\JoinColumn(nullable=true)
    */
     private $CommentaireFils;

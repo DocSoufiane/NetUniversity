@@ -5,6 +5,7 @@ namespace NetUniversity\PlatformBundle\Controller;
 use NetUniversity\PlatformBundle\Entity\Utilisateur;
 
 use NetUniversity\PlatformBundle\Entity\Commentaire;
+use NetUniversity\PlatformBundle\Entity\Sujet;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;

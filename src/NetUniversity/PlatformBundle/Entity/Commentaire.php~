@@ -14,7 +14,7 @@ class Commentaire
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", cascade={"remove"}, inversedBy="commentaire")
+   * @ORM\ManyToOne(targetEntity="NetUniversity\PlatformBundle\Entity\Sujet", inversedBy="commentaire")
    * @ORM\JoinColumn(nullable=true)
    */
     private $sujet;

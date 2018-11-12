@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use NetUniversity\PlatformBundle\Repository\ContactsRepository;
 use Doctrine\ORM\EntityRepository;
 
+use NetUniversity\PlatformBundle\Entity\Contacts;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -132,6 +134,20 @@ class Utilisateur extends BaseUser
    */
     private $role;
 
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Contacts", mappedBy="Validateur")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $InvitationEnvoye;
+
+    /**
+   * @ORM\OneToMany(targetEntity="NetUniversity\PlatformBundle\Entity\Contacts", mappedBy="Demandeur")
+   * @ORM\JoinColumn(nullable=true)
+   */
+    private $InvitationRecu;
+
+
+    private $Contact;
 
     /**
      * Get id.
@@ -585,5 +601,118 @@ class Utilisateur extends BaseUser
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * Add invitationEnvoye.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $invitationEnvoye
+     *
+     * @return Utilisateur
+     */
+    public function addInvitationEnvoye(\NetUniversity\PlatformBundle\Entity\Contacts $invitationEnvoye)
+    {
+        $this->InvitationEnvoye[] = $invitationEnvoye;
+
+        return $this;
+    }
+
+    /**
+     * Remove invitationEnvoye.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $invitationEnvoye
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeInvitationEnvoye(\NetUniversity\PlatformBundle\Entity\Contacts $invitationEnvoye)
+    {
+        return $this->InvitationEnvoye->removeElement($invitationEnvoye);
+    }
+
+    /**
+     * Get invitationEnvoye.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvitationEnvoye()
+    {
+        return $this->InvitationEnvoye;
+    }
+
+    /**
+     * Add invitationRecu.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $invitationRecu
+     *
+     * @return Utilisateur
+     */
+    public function addInvitationRecu(\NetUniversity\PlatformBundle\Entity\Contacts $invitationRecu)
+    {
+        $this->InvitationRecu[] = $invitationRecu;
+
+        return $this;
+    }
+
+    /**
+     * Remove invitationRecu.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $invitationRecu
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeInvitationRecu(\NetUniversity\PlatformBundle\Entity\Contacts $invitationRecu)
+    {
+        return $this->InvitationRecu->removeElement($invitationRecu);
+    }
+
+    /**
+     * Get invitationRecu.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvitationRecu()
+    {
+        return $this->InvitationRecu;
+    }
+
+    /**
+     * Add contact.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $contact
+     *
+     * @return Utilisateur
+     */
+    public function addContact(\NetUniversity\PlatformBundle\Entity\Contacts $contact)
+    {
+        $this->Contact[] = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Remove contact.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Contacts $contact
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContact(\NetUniversity\PlatformBundle\Entity\Contacts $contact)
+    {
+        return $this->Contact->removeElement($contact);
+    }
+
+    /**
+     * Get contact.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContact()
+    {
+        $queue =  array();
+
+        array_push($queue, $this->getInvitationRecu());
+        array_push($queue, $this->getInvitationEnvoye());
+
+        return $queue;
     }
 }

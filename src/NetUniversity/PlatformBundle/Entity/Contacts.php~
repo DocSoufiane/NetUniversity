@@ -144,4 +144,64 @@ class Contacts
     {
         return $this->etat;
     }
+
+    /**
+     * Set demandeur.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $demandeur
+     *
+     * @return Contacts
+     */
+    public function setDemandeur(\NetUniversity\PlatformBundle\Entity\Utilisateur $demandeur)
+    {
+        $this->Demandeur = $demandeur;
+
+        return $this;
+    }
+
+    /**
+     * Get demandeur.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getDemandeur()
+    {
+        return $this->Demandeur;
+    }
+
+    /**
+     * Set validateur.
+     *
+     * @param \NetUniversity\PlatformBundle\Entity\Utilisateur $validateur
+     *
+     * @return Contacts
+     */
+    public function setValidateur(\NetUniversity\PlatformBundle\Entity\Utilisateur $validateur)
+    {
+        $this->Validateur = $validateur;
+
+        return $this;
+    }
+
+    /**
+     * Get validateur.
+     *
+     * @return \NetUniversity\PlatformBundle\Entity\Utilisateur
+     */
+    public function getValidateur()
+    {
+        return $this->Validateur;
+    }
+
+    public function validationContact()
+    {
+        return $this->etat=true;
+    }
+
+    public function removeContact()
+    {
+        return removeElement($this);
+    }
+
+    
 }

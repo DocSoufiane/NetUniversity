@@ -6,6 +6,7 @@ namespace NetUniversity\PlatformBundle\Controller;
 use NetUniversity\PlatformBundle\Entity\Utilisateur;
 use NetUniversity\PlatformBundle\Entity\University;
 use NetUniversity\PlatformBundle\Entity\Cours;
+use NetUniversity\PlatformBundle\Entity\Contacts;
 use NetUniversity\PlatformBundle\Entity\Publication;
 use NetUniversity\PlatformBundle\Entity\Institut;
 use NetUniversity\PlatformBundle\Entity\Sujet;
@@ -50,9 +51,6 @@ class ForumController extends Controller
 
     }
 
-
-
-
 	public function ViewSubjectAction(Request $request, $Id)
 	{
 		if (!isset($Id)) {
@@ -73,6 +71,9 @@ class ForumController extends Controller
 						$like=1;
 				}         
 			}
+		//	dump($Sujet->getUtilisateur()->getInvitationRecu());
+		//	dump($Sujet->getUtilisateur()->getInvitationEnvoye());
+		//	 die;
     		return $this->render('NetUniversityPlatformBundle:Forum:viewSujet.html.twig', array('Sujet'=> $Sujet, 'like'=>$like));
 		}
 	}
@@ -145,6 +146,34 @@ class ForumController extends Controller
 
 	}
 
+	public function RemoveCommentaireAction(Request $request){
+
+
+		$em = $this->getDoctrine()->getManager();
+
+		$id = $request->get('Commentaire-id');
+		$isChecked = $request->get('checkbox-value');
+
+	    $Commentaire = $em->getRepository('NetUniversityPlatformBundle:Commentaire')->find($id);
+		
+
+			$em = $this->getDoctrine()->getManager();
+
+			if (null === $Commentaire) {
+			  throw new NotFoundHttpException("Le Commentaire d'id ".$CommentaireId." n'existe pas.");
+			}
+
+			if ($this->getUser() == $Commentaire->getutilisateur()) {
+			      	$em->remove($Commentaire);
+			      	//$em->persist($user);
+			      	$em->flush();
+ 			return new Response("Commentaire bine supprimé ! ");
+
+			}
+
+ 			return new Response("Problème de suppression ! ");
+
+	}
 
 public function AddSujetAction(Request $request)
 	{		

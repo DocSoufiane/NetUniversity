@@ -3,58 +3,60 @@
             {% set x = 0 %}
 
           {% for Commentaire in listeCommentaire %}
-
-          <div style="        background: #ecf0f53b;" class="box-footer box-comments">
+          {% if Commentaire.CommentaireMere is null %}
+          <div id="Comment{{ Commentaire.id }}" style="        background: #ecf0f53b;" class="box-footer box-comments">
             <div class="box-comment">
                 <!-- User image -->
                 <img class="img-circle img-sm" src="{{Commentaire.Utilisateur.urlIMAGE}}" alt="User Image">
 
                 <div class="comment-text">
+                      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                      {% if app.user.id == Commentaire.utilisateur.id %}
+                      <a title="Supprimer" Style="float: right;" id="Comment{{ Commentaire.id }}" onclick="Supprimercommentaire({{ Commentaire.id }}, '{{ path('RemoveCommentaire') }}')"
+
+                      href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                      {% endif %}
+                      {% endif %}
                       <span class="username">
                         {{Commentaire.Utilisateur.Nom}} {{Commentaire.Utilisateur.Prenom}}
                         <span class="text-muted pull-right">{{ Commentaire.DateDuComment|date('F jS \\a\\t g:ia') }}</span>
                       </span><!-- /.username -->
                       {{Commentaire.Comment }}
                       <br>
-              <div class="box-footer box-comments">
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../uploads/img/avatar.jpg" alt="User Image">
+                          {% for Commentair in Commentaire.CommentaireFils %}
 
-                <div class="comment-text">
-                      <span class="username">
-                        Maria Gonzales
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../uploads/img/avatar.jpg" alt="User Image">
+                          <div id="Comment{{ Commentaire.id }}" style="        background: #ecf0f53b;" class="box-footer box-comments">
+                            <div class="box-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="{{Commentair.Utilisateur.urlIMAGE}}" alt="User Image">
 
-                <div class="comment-text">
-                      <span class="username">
-                        Luna Stark
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                      It is a long established fact that a reader will be distracted
-                      by the readable content of a page when looking at its layout.
-                      <br>
-                    </div>
-                    <!-- /.comment-text -->
-                  </div>
-                  <!-- /.box-comment -->
-                </div>
+                                <div class="comment-text">
+                                      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                      {% if app.user.id == Commentair.utilisateur.id %}
+                                      <a title="Supprimer" Style=" float: right;"  onclick="Supprimercommentaire({{ Commentair.id }}, '{{ path('RemoveCommentaire') }}')"
+
+                      href="#"  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                                      {% endif %}
+                                      {% endif %}
+                                      <span class="username">
+                                        {{Commentair.Utilisateur.Nom}} {{Commentair.Utilisateur.Prenom}}
+                                        <span class="text-muted pull-right">{{ Commentair.DateDuComment|date('F jS \\a\\t g:ia') }}</span>
+                                      </span><!-- /.username -->
+                                      {{Commentair.Comment }}
+                                      <br>
+                          
+                                    </div>
+                                    <!-- /.comment-text -->
+                                  </div>
+                          </div>
+                          {% endfor %}
                 {# {% if  %} #}
                 {{ render(controller("NetUniversityPlatformBundle:Sujet:addComment", { 'SujetId' : SujetId, 'commentMere': Commentaire.id } )) }}
-          {# {% endif %} #}
+                {# {% endif %} #}
                     </div>
                     <!-- /.comment-text -->
                   </div>
           </div>
+          {% endif %}
           {% endfor %}
 

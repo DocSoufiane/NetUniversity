@@ -458,4 +458,28 @@ class University
     {
         return $this->sujet;
     }
+
+    /**
+     * Set privilege.
+     *
+     * @param string $privilege
+     *
+     * @return University
+     */
+    public function setPrivilege($privilege)
+    {
+        $this->privilege = $privilege;
+
+        return $this;
+    }
+
+    /**
+     * Get privilege.
+     *
+     * @return string
+     */
+    public function getPrivilege()
+    {
+        return $this->privilege;
+    }
 }
