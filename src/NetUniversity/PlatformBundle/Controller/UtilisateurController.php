@@ -597,7 +597,7 @@ public function listeModuleAction(Request $request)
 
 	public function likeCoursAction(Request $request)
 	{
-		    $em = $this->getDoctrine()->getManager();
+		$em = $this->getDoctrine()->getManager();
 
 		$id = $request->get('Cours-id');
 		$isChecked = $request->get('checkbox-value');

@@ -221,6 +221,17 @@ ViewClasse:
     requirements:
       id: \d+
 
+ChateConversation:
+    path: /Chate/{UserId}
+    defaults: 
+      _controller: NetUniversityPlatformBundle:Chate:Conversation
+    requirements:
+      id: \d+
+
+Chate:
+    path: /Chate/Add
+    defaults: { _controller: NetUniversityPlatformBundle:Chate:AddMessage}
+
 ForumSubject:
     path: /Forum/Subject/{Id}
     defaults: { _controller: NetUniversityPlatformBundle:Forum:ViewSubject}

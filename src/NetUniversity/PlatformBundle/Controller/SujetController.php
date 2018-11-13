@@ -59,11 +59,8 @@ class SujetController extends Controller
 		if(!$this->getuser()){
 				echo "<a href=\"/login\" class=\"btn btn-default btn-flat\">Se connecter pour commenter</a>";
 		}
-		
 
-
-
-		dump('je suis la');
+		//dump('je suis la');
 	    if ($request->get('Sujet-id')) {
 
 			$id = $request->get('Sujet-id');

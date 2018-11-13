@@ -118,51 +118,5 @@ class PublicationController extends Controller
       return $this->render('NetUniversityPlatformBundle:Publication:add.html.twig', array('Nom' => $publication->getName(), ''=> $publication->getLien(), ));
     }
 
-  public function AddAction(Request $request)
-  {   
-
-
-        $Cours = New Cours();
-        $Recherche = New Recherche();
-        $form   = $this->get('form.factory')->create(CoursType::class, $Cours);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $date = new \DateTime();
-            $Cours->setDateDeCreation($date);
-            $Cours->setderniereModif($date);
-            $repository = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('NetUniversityPlatformBundle:Module');
-          $Module = $repository->find(2);
-          $Module->addCour($Cours);
-          $Cours->addModule($Module);
-        
-          $user = $this->getUser();
-          $Cours->setUtilisateur($user);
-          $motCle= $Cours->getNom().' '.$Cours->getUtilisateur();
-          $Recherche->setMotCle($motCle);
-          //$Cours->setModule($Module);
-            $Cours->upload();
-
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($Cours);
-          $Recherche->setcours($Cours);
-
-          $em->persist($Recherche);
-          
-            
-            $em->persist($Module);
-            $em->flush();
-
-          $request->getSession()->getFlashBag()->add('notice', 'Département bien créée.');
-
-          return $this->redirectToRoute('ViewCours', array('CoursId' => $Cours->getid()));  
-
-    // //////////////////////////////////////////////////////////////////
-  }
-
-      return $this->render('NetUniversityPlatformBundle:Cours:add.html.twig', array('form' => $form->createView(),));
-
-  }
 
 }
